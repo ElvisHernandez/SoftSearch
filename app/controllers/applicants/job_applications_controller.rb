@@ -4,6 +4,9 @@ class Applicants::JobApplicationsController < Applicants::UserBaseController
     def index
     end
 
+    def new
+    end
+
     private
 
     def is_current_user
