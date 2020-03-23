@@ -3,7 +3,8 @@
     <div class="wrap-login post-page">
         <h1 class=subtitles-login-page>Apply To This Job</h1>
 
-    <%= form_with(model: @job_app, url:applicants_user_job_applications_path, class: "subheading-subtitles-posting") do |f| %>
+    <%= form_with(model: @job_app, url: '/applicants/users/:user_id/:job_id/job_applications/new',
+     class: "subheading-subtitles-posting") do |f| %>
     <%= f.label :name %><%= f.text_field :name, class: "form-control" %>
     <br />
     <%= f.label :job_id %>

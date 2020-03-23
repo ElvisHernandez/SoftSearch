@@ -5,6 +5,11 @@ class Applicants::JobApplicationsController < Applicants::UserBaseController
     end
 
     def new
+        @job_app = JobApp.new
+        puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//////////////#{params}"
+    end
+
+    def create 
     end
 
     private

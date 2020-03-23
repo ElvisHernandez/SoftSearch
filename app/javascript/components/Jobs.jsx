@@ -14,7 +14,7 @@ const Jobs = ({ jobs, loading, userID }) => {
                     <div className="card-body">
                         <h5 className="card-title">{properties.position}</h5>
                         <p className="card-text">{properties.description}</p>
-                        <a href={`/applicants/users/${userID}/job_applications/new`} className="btn btn-primary">Apply Now</a>
+                        <a href={`/applicants/users/${userID}/${properties.id}/job_applications/new`} className="btn btn-primary">Apply Now</a>
                     </div>
                 </div>
             ))}
