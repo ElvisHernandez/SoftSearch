@@ -2,7 +2,7 @@
     <div class="wrap-login post-page">
         <h1 class=subtitles-login-page>Post a Job Listing</h1>
 
-        <%= form_with(model: @job, url: "/employers/admins/#{@user_id}/jobs", class: "subheading-subtitles-posting") do |f| %>
+        <%= form_with(model: @job, url: employers_admin_jobs_path, class: "subheading-subtitles-posting") do |f| %>
         <%= f.label :company_name %>
         <%= f.text_field :company_name, class: "form-control" %>
         <br>

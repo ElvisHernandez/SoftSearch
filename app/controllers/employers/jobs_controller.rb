@@ -29,6 +29,13 @@ class Employers::JobsController < Employers::AdminBaseController
     redirect_to employers_admin_jobs_path
   end
 
+  def destroy
+    @job = Job.find(params[:id])
+    @job.destroy
+
+    redirect_to employers_admin_jobs_path
+  end
+
   private
 
   def job_params
