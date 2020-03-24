@@ -5,7 +5,7 @@ class Employers::JobsController < Employers::AdminBaseController
 
   def index
     @user_id = params['admin_id']
-    @jobs = Job.all
+    @jobs = Job.where(user_id: @user_id)
   end
 
   def show

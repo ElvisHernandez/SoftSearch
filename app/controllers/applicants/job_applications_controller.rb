@@ -15,11 +15,6 @@ class Applicants::JobApplicationsController < Applicants::UserBaseController
         user_email = job_app_params['email']
         job_id = job_app_params['job_id']
         user_id = User.where(email: user_email)[0].id
-
-
-        puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!////////////#{(user_email != current_user.email).class}"
-        # puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!////////////#{current_user.email}"
-
         @job_app = JobApp.new(user_id: user_id, job_id: job_id)
 
         if(user_email != current_user.email) 

@@ -2,7 +2,7 @@
 <hr>
 <a href="/employers/jobs" class="btn btn-md u-btn-primary g-mr-10 g-mb-15">JOBS POSTED</a>
 <a href="#" class="btn btn-md u-btn-primary g-mr-10 g-mb-15">VIEW APPLICANTS</a>
-<a href="/employers/jobs/new" class="btn btn-md u-btn-primary g-mr-10 g-mb-15">+POST ANOTHER JOB</a>
+<a href=<%="/employers/admins/#{@user_id}/jobs/new"%> class="btn btn-md u-btn-primary g-mr-10 g-mb-15">+POST ANOTHER JOB</a>
 
 
 
@@ -36,7 +36,7 @@
                 <td class="p-3"><%= job.skill_names %></td>
                 <td class="p-3"><%= job.user.email %></td>
                 <td>
-                    <%# <%= link_to "View", "jobs/#{job.id}", class: "btn btn-link no-underline" %> %>
+                    <%= link_to "View", "jobs/#{job.id}", class: "btn btn-link no-underline" %>
                 </td>
             </tr>
             <% end %>

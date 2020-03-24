@@ -26,11 +26,8 @@ Rails.application.routes.draw do
     namespace :employers do
       resources :admins, only: [:index] do
         resources :jobs
-
       end
       root to: 'admins#index'
-
-      # root "pages#home"
     end
   end
 
