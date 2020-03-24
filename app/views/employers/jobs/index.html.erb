@@ -1,7 +1,7 @@
 
 <hr>
 <a href="/employers/jobs" class="btn btn-md u-btn-primary g-mr-10 g-mb-15">JOBS POSTED</a>
-<a href="#" class="btn btn-md u-btn-primary g-mr-10 g-mb-15">VIEW APPLICANTS</a>
+<a href=<%= employers_admin_apps_path	%> class="btn btn-md u-btn-primary g-mr-10 g-mb-15">VIEW APPLICANTS</a>
 <a href=<%="/employers/admins/#{@user_id}/jobs/new"%> class="btn btn-md u-btn-primary g-mr-10 g-mb-15">+POST ANOTHER JOB</a>
 
 <% if @jobs.exists? %>
@@ -34,7 +34,7 @@
                 <td>
                     <%= link_to "View", "jobs/#{job.id}", class: "btn btn-link no-underline" %>
                     <%= link_to "Delete", "/employers/admins/#{@user_id}/jobs/#{job['id']}",
-                    method: :delete, data: { confirm: "Are you sure?" } %>
+                    class: "btn btn-link no-underline", method: :delete, data: { confirm: "Are you sure?" } %>
                 </td>
             </tr>
             <% end %>

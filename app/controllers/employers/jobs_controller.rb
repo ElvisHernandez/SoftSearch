@@ -14,7 +14,6 @@ class Employers::JobsController < Employers::AdminBaseController
 
   def new
     @user_id = params['admin_id']
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//////////////////////#{@user_id}"
     @job = Job.new
     @skills = Skill.all
   end
@@ -34,6 +33,11 @@ class Employers::JobsController < Employers::AdminBaseController
     @job.destroy
 
     redirect_to employers_admin_jobs_path
+  end
+
+  def apps
+    user_id = params['admin_id']
+    @jobs = Job.where(user_id: user_id)
   end
 
   private

@@ -1,0 +1,10 @@
+<h1>All your Job Apps</h1>
+<hr />
+
+<% @jobs.each do |job| %>
+    <% job.job_apps.each do |job_app| %>
+        <p><%= job_app.user.email  %></p>
+        <p><%= job_app.job_id %></p>
+        <p>Current Status: <%= job_app.status%></p>
+    <% end %>
+<% end %>

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     namespace :employers do
       resources :admins, only: [:index] do
         resources :jobs
+        get '/apps', to: 'jobs#apps'
       end
       root to: 'admins#index'
     end
