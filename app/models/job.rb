@@ -45,7 +45,7 @@ class Job < ApplicationRecord
         end
       else
         job.skills.each do |skill|
-          if(jobs_per_skill.has_key?("#{skill}"))
+          if(jobs_per_skill.has_key?("#{skill['name']}"))
             jobs_per_skill["#{skill['name']}"].push(job)
           else
             jobs_per_skill["#{skill['name']}"] = [job]
