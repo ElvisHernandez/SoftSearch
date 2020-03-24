@@ -3,6 +3,7 @@
 <% @job_apps.each do |job_app| %>
     <h1><%= job_app.job['position'] %></h1>
     <p><%= job_app.job['description'] %></p>
+    <p></p>
     <% case job_app.status 
         when 0 %> <h2>Current Status: Pending</h2>
         <% when 1 %> <h2>Current Status: Accepted</h2>
