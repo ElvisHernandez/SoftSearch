@@ -13,6 +13,8 @@ class Employers::JobsController < Employers::AdminBaseController
   end
 
   def new
+    @user_id = params['admin_id']
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//////////////////////#{@user_id}"
     @job = Job.new
     @skills = Skill.all
   end
@@ -24,7 +26,7 @@ class Employers::JobsController < Employers::AdminBaseController
     job_params[:skills].each do |skill_id|
       job.job_skills.create(job: job, skill: Skill.find(skill_id)) if skill_id.length > 0
     end
-    redirect_to employers_jobs_path
+    redirect_to employers_admin_jobs_path
   end
 
   private
