@@ -6,13 +6,24 @@ class Applicants::JobApplicationsController < Applicants::UserBaseController
 
     def new
         @job_app = JobApp.new
-        puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//////////////#{params}"
+        # @job_id = params['job_id']
+        # puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//////////////#{params}"
+
     end
 
     def create 
+        puts "????????????????????????????????????????????????????????????????????????????????????//////////////#{params.inspect}"
+        @job_app = JobApp.new(job_app_params)
+
+        @job_app.save
+        redirect_to applicants_user_job_applications_path
     end
 
     private
+
+    def job_app_params
+        params.require(:job_app).permit(:user_id, :job_id)
+    end
 
     def is_current_user
         user_url_id = params['user_id'].to_i

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   authenticated :user, ->(u) { !u.employer } do
     namespace :applicants do
       resources :users, only: [:index] do
-        # resources :job_applications
+        resources :job_applications
         get '/:job_id/job_applications/new', to: 'job_applications#new'
       end
       root to: 'users#index'
