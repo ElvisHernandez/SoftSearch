@@ -5,20 +5,23 @@
 
         <%= form_with(model: @job_app, url: applicants_user_job_applications_path,
             class: "subheading-subtitles-posting") do |f| %>
-
-        
-        
-        <%= f.label :user_id %>
-        <%= f.number_field :user_id, class: "form-control" %>
+        <%= f.label :name %><%= f.text_field :name, class: "form-control" %>
         <br />
 
-        <%= f.label :job_id %>
-        <%= f.number_field :job_id, class: "form-control" %>
+        <%= f.hidden_field :job_id, value: @job_id  %>
         <br />
 
+        <%= f.label :email %>
+        <%= f.text_field :email, class: "form-control" %>
+        <br />
 
-
-
+        <div class="skills-checkboxes">
+            <h2 class="smallsubtitle">Choose Skill(S) You Have</h2>
+            <% Skill.all.each do |skill|%>
+                <%= check_box_tag "#{skill["name"]}", "yes" %>
+                <%= label_tag "#{skill["name"]}" %>
+            <% end %>
+        </div>
 
         <div class="container-login100-form-btn">
             <div class="wrap-login100-form-btn">

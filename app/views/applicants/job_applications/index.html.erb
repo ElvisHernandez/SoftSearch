@@ -1,1 +1,7 @@
 <h1>All your job apps</h1>
+<hr>
+<% @job_apps.each do |job_app| %>
+    <h1><%= job_app.job['position'] %></h1>
+    <p><%= job_app.job['description'] %></p>
+    <h2>Current Status: <%= job_app.status%></h2>
+<% end %>
