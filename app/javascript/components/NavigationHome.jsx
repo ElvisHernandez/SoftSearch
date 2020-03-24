@@ -13,6 +13,9 @@ const Navigation = ({ isSignedIn }) => {
         }
         <a className="p-2 text-white px-4" href="/map?location=GET_ALL">Find Jobs</a>
       </nav>
+      {isSignedIn && !isSignedIn.employer &&
+        <a className="p-2 text-white" href={`/applicants/users/${isSignedIn.id}/job_applications`}>View Job apps</a>
+      }
       {isSignedIn ? 
         (<a id="login" className="btn btn-outline-primary mr-3" href='/users/sign_out'>Logout</a>) :
         <>
