@@ -16,11 +16,15 @@ class Applicants::JobApplicationsController < Applicants::UserBaseController
         job_id = job_app_params['job_id']
         user_id = User.where(email: user_email)[0].id
 
-        unless user_id == current_user.id
-            redirect_to "/applicants/users/#{current_user.id}/#{job_id}/job_applications/new"
-        end
+
+        puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!////////////#{(user_email != current_user.email).class}"
+        # puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!////////////#{current_user.email}"
 
         @job_app = JobApp.new(user_id: user_id, job_id: job_id)
+
+        if(user_email != current_user.email) 
+            @job_app = JobApp.new
+        end 
 
         if @job_app.save
             redirect_to applicants_user_job_applications_path
