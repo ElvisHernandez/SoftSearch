@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       resources :admins, only: [:index] do
         resources :jobs
         get '/apps', to: 'jobs#apps'
+        get '/handle_app', to: 'jobs#handle_app'
       end
       root to: 'admins#index'
     end

@@ -36,8 +36,17 @@ class Employers::JobsController < Employers::AdminBaseController
   end
 
   def apps
-    user_id = params['admin_id']
-    @jobs = Job.where(user_id: user_id)
+    @user_id = params['admin_id']
+    @jobs = Job.where(user_id: @user_id)
+  end
+
+  def handle_app
+    response = params['response'].to_i
+    job_app_id = params['job_app_id'].to_i
+    JobApp.find(job_app_id).update_attribute(:status,response)
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////#{response}"
+
+    redirect_to employers_admin_apps_path
   end
 
   private
