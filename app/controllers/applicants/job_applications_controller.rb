@@ -24,6 +24,13 @@ class Applicants::JobApplicationsController < Applicants::UserBaseController
         end
     end
 
+    def destroy
+        @job_app = JobApp.find(params[:id])
+        @job_app.destroy
+
+        redirect_to applicants_user_job_applications_path
+    end
+
     private
 
     def job_app_params
