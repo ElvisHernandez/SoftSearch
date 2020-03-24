@@ -9,10 +9,7 @@ Rails.application.routes.draw do
 
   resource :map, only: [:show]
   
-
   get 'map/jobs' => 'maps#jobs'
-  post 'map/filter' => 'maps#filter'
-  post 'map/unfilter' => 'maps#unfilter'
   post '/search' => 'pages#search'
 
   authenticated :user, ->(u) { !u.employer } do
@@ -27,11 +24,12 @@ Rails.application.routes.draw do
 
   authenticated :user, ->(u) { u.employer } do
     namespace :employers do
-      resources :admins, only: [:index]
+      resources :admins, only: [:index] do
+        resources :jobs
+        get '/apps', to: 'jobs#apps'
+        get '/handle_app', to: 'jobs#handle_app'
+      end
       root to: 'admins#index'
-      resources :jobs, only: [:index, :show, :new, :create]
-
-      # root "pages#home"
     end
   end
 

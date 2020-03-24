@@ -1,12 +1,8 @@
-<h1>Jobs#index</h1>
-<p>Find me in app/views/jobs/index.html.erb</p>
+
 <hr>
 <a href="/employers/jobs" class="btn btn-md u-btn-primary g-mr-10 g-mb-15">JOBS POSTED</a>
-<a href="#" class="btn btn-md u-btn-primary g-mr-10 g-mb-15">VIEW APPLICANTS</a>
-<a href="/employers/jobs/new" class="btn btn-md u-btn-primary g-mr-10 g-mb-15">+POST ANOTHER JOB</a>
-
-
-
+<a href=<%= employers_admin_apps_path	%> class="btn btn-md u-btn-primary g-mr-10 g-mb-15">VIEW APPLICANTS</a>
+<a href=<%="/employers/admins/#{@user_id}/jobs/new"%> class="btn btn-md u-btn-primary g-mr-10 g-mb-15">+POST ANOTHER JOB</a>
 
 <% if @jobs.exists? %>
 <div class="bg-white rounded shadow table-responsive" style="width: 90vw;">
@@ -33,11 +29,12 @@
                 <td class="p-3"><%= job.created_at %></td>
                 <td class="p-3"><%= job.longitude %></td>
                 <td class="p-3"><%= job.latitude %></td>
-                <td class="p-3"><%= job.latitude %></td>
                 <td class="p-3"><%= job.skill_names %></td>
                 <td class="p-3"><%= job.user.email %></td>
                 <td>
                     <%= link_to "View", "jobs/#{job.id}", class: "btn btn-link no-underline" %>
+                    <%= link_to "Delete", "/employers/admins/#{@user_id}/jobs/#{job['id']}",
+                    class: "btn btn-link no-underline", method: :delete, data: { confirm: "Are you sure?" } %>
                 </td>
             </tr>
             <% end %>

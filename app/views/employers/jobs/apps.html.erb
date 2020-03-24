@@ -1,0 +1,23 @@
+<h1>All your Job Apps</h1>
+<hr />
+
+<% @jobs.each do |job| %>
+    <% job.job_apps.each do |job_app| %>
+        <h2>Applicant email: <%= job_app.user.email  %></h2>
+        <h2>Position: <%= job.position %></h2>
+        <% case job_app.status 
+            when 0 %> <h4>Current Status: Pending</h4>
+            <% when 1 %> <h4>Current Status: Accepted</h4>
+            <% when -1 %> <h4>Current Status: Rejected</h4>
+        <% end %>
+        <%= link_to 'Accept', "/employers/admins/#{@user_id}/handle_app?response=1&job_app_id=#{job_app.id}",
+        class: "btn btn-link no-underline", data: { confirm: "Are you sure?" } %>
+        <%= link_to 'Reject', "/employers/admins/#{@user_id}/handle_app?response=-1&job_app_id=#{job_app.id}",
+        class: "btn btn-link no-underline", data: { confirm: "Are you sure?" } %>
+    <% end %>
+<% end %>
+<hr />
+<%= link_to 'Home', root_path,
+class: "btn btn-link no-underline" %>
+<%= link_to 'Dashboard', employers_admin_jobs_path,
+class: "btn btn-link no-underline" %>
