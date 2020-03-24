@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 class Employers::JobsController < Employers::AdminBaseController
+  before_action :is_current_user
+
   def index
     @jobs = Job.all
+    @user_id = params['admin_id']
   end
 
   def show
@@ -28,5 +31,12 @@ class Employers::JobsController < Employers::AdminBaseController
 
   def job_params
      params.require(:job).permit(:company_name, :description, :position, :longitude, :latitude, :user_id, :skills => [])
+  end
+
+  def is_current_user
+    user_url_id = params['admin_id'].to_i
+    unless current_user.id == user_url_id
+        redirect_to root_path
+    end
   end
 end

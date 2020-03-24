@@ -8,8 +8,10 @@ const Navigation = ({ isSignedIn }) => {
       <img src={logo} alt="#" className="logo-img" />
       <nav id="navlinks" className="my-2 my-md-0 mr-md-4">
         {isSignedIn && isSignedIn.employer &&
-          <a className="p-2 text-white" href="/employers/jobs/new">Post a Job</a>
+          <a className="p-2 text-white" href={`/employers/admins/${isSignedIn.id}/jobs`}>Post a Job</a>
+          // /applicants/users/:user_id/job_applications)
         }
+        {console.log(isSignedIn.id)}
         <a className="p-2 text-white px-4" href="/map?location=GET_ALL">Find Jobs</a>
       </nav>
       {isSignedIn ? 
