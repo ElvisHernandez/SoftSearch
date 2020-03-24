@@ -4,8 +4,8 @@ class Employers::JobsController < Employers::AdminBaseController
   before_action :is_current_user
 
   def index
-    @jobs = Job.all
     @user_id = params['admin_id']
+    @jobs = Job.all
   end
 
   def show

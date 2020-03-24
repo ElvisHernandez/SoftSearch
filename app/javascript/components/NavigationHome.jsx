@@ -11,7 +11,6 @@ const Navigation = ({ isSignedIn }) => {
           <a className="p-2 text-white" href={`/employers/admins/${isSignedIn.id}/jobs`}>Post a Job</a>
           // /applicants/users/:user_id/job_applications)
         }
-        {console.log(isSignedIn.id)}
         <a className="p-2 text-white px-4" href="/map?location=GET_ALL">Find Jobs</a>
       </nav>
       {isSignedIn ? 

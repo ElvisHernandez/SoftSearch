@@ -2,7 +2,8 @@ class Applicants::JobApplicationsController < Applicants::UserBaseController
     before_action :is_current_user
    
     def index
-        @job_apps = JobApp.all
+        user_id = params['user_id']
+        @job_apps = JobApp.where(user_id: user_id)
     end
 
     def new
