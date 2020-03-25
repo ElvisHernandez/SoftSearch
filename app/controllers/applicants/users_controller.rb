@@ -19,16 +19,16 @@ class Applicants::UsersController < Applicants::UserBaseController
     render json: { favoriteId: user_favorite['id'] }
   end
 
-  def show
-      @user_favorites = UserFavorite.find(params[:id])
-    end
+  def get_all_favs
+    user_id = params['user_id']
+    user_favorites = UserFavorite.where(user_id: user_id)
+
+    render json: { userFavorites: user_favorites }
+  end
     
   def destroy
     job_id = params['jobId']
     user_id = params['user_id']
-
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////#{params}"
-
 
     user_favorite = UserFavorite.where(user_id: user_id, job_id: job_id)[0]
     if(user_favorite)
