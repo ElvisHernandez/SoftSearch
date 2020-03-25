@@ -2,6 +2,7 @@
 
 class Employers::JobsController < Employers::AdminBaseController
   before_action :is_current_user
+  skip_before_action :verify_authenticity_token
 
   def index
     @user_id = params['admin_id']
@@ -19,13 +20,43 @@ class Employers::JobsController < Employers::AdminBaseController
   end
 
   def create
-    job = Job.new(job_params.except(:skills))
-    job.user = current_user
-    job.save
-    job_params[:skills].each do |skill_id|
-      job.job_skills.create(job: job, skill: Skill.find(skill_id)) if skill_id.length > 0
+
+    if(!%i[company_name position description address admin_id skills].all? { |s| job_params.has_key? s })
+      return
     end
-    redirect_to employers_admin_jobs_path
+
+    puts "??????????????????????????????????????????????????????????????????????????????????????????????///////////#{params[:skills]}"
+
+    job_address = job_params['address']
+    job_position = job_params['position']
+    job_description = job_params['description']
+    company_name = job_params['company_name']
+    user_id = job_params['admin_id']
+
+    
+    coords = Geocoder.search(job_address)
+    if coords.first
+      coords = coords.first.coordinates.reverse
+      # puts "??????????????????????????????????????????????????????????????????????????????????????????????///////////#{coords.first.coordinates.reverse}"
+
+      job = Job.new(
+        company_name: company_name,
+        position: job_position,
+        description: job_description,
+        longitude: coords[0],
+        latitude: coords[1],
+        user_id: user_id
+        )
+
+      job.user = current_user
+      job.save
+      job_params[:skills].each do |skill_id|
+        job.job_skills.create(job: job, skill: Skill.find(skill_id)) if skill_id.length > 0
+      end
+      redirect_to employers_admin_jobs_path
+    else
+      return
+    end
   end
 
   def destroy
@@ -44,15 +75,20 @@ class Employers::JobsController < Employers::AdminBaseController
     response = params['response'].to_i
     job_app_id = params['job_app_id'].to_i
     JobApp.find(job_app_id).update_attribute(:status,response)
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////#{response}"
 
     redirect_to employers_admin_apps_path
+  end
+
+  def add_skill
+    skill_to_add = params['skill']
+    Skill.create(name: skill_to_add)
+    render json: { skills: Skill.all }
   end
 
   private
 
   def job_params
-     params.require(:job).permit(:company_name, :description, :position, :longitude, :latitude, :user_id, :skills => [])
+     params.permit(:company_name, :description, :position, :address, :admin_id, :skills => [])
   end
 
   def is_current_user

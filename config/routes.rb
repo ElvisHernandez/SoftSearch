@@ -28,6 +28,7 @@ Rails.application.routes.draw do
         resources :jobs
         get '/apps', to: 'jobs#apps'
         get '/handle_app', to: 'jobs#handle_app'
+        post '/add_skill', to: 'jobs#add_skill'
       end
       root to: 'admins#index'
     end

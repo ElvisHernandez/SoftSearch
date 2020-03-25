@@ -37,6 +37,18 @@ const Map = ({ API_KEY, jobs, all_skills, userID }) => {
     const currentJobs = filteredJobs.slice(indexOfFirstJob,indexOfLastJob)
     const paginate = pageNumber => setCurrentPage(pageNumber)
 
+
+    useEffect(() => {
+        if(!query) return
+        fetchJobData()
+    },[query])
+
+    useEffect(() => {
+        if(!filteredJobs.length) return
+        setLoading(false)
+    },[filteredJobs])
+
+
     useEffect(() => {
         mapboxgl.accessToken = API_KEY;
         if(jobs.coords[0] === -98.5795 && jobs.coords[1] === 39.8283) {
@@ -48,16 +60,6 @@ const Map = ({ API_KEY, jobs, all_skills, userID }) => {
             mapRef.current.remove()
         }
     },[])
-
-    useEffect(() => {
-        if(!query) return
-        fetchJobData()
-    },[query])
-
-    useEffect(() => {
-        if(!filteredJobs.length) return
-        setLoading(false)
-    },[filteredJobs])
 
     useEffect(() => {
         if(apiJobs.job_data) {
@@ -128,7 +130,7 @@ const Map = ({ API_KEY, jobs, all_skills, userID }) => {
         })
         setVisibleSkills([])
         setFilteredJobs([])
-    }
+    }  
 
     function showAllSkills() {
         currentSkills.forEach( skill => {

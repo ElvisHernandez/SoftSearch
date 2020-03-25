@@ -6,6 +6,7 @@ RSpec.describe Job, type: :model do
   
   subject {
     described_class.new(
+      company_name: 'SoftSearch',
       position: "sr. dev",
       description: "Loremh",
       longitude: -80.2,
@@ -100,7 +101,8 @@ RSpec.describe Job, type: :model do
       expect(user_favs.length).to eq 0
     end
 
-    it "should have many user_favorites and destroy all associated user_favorites when destroyed"  do
+    it "should have many user_favorites and destroy all associated 
+        user_favorites when destroyed"  do
       should have_many(:user_favorites).dependent(:destroy) 
      end
   end

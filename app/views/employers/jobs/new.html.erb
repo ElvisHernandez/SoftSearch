@@ -1,38 +1,4 @@
-<div class="container-login">
-    <div class="wrap-login post-page">
-        <h1 class=subtitles-login-page>Post a Job Listing</h1>
 
-        <%= form_with(model: @job, url: employers_admin_jobs_path, class: "subheading-subtitles-posting") do |f| %>
-        <%= f.label :company_name %>
-        <%= f.text_field :company_name, class: "form-control" %>
-        <br>
-        <%= f.label :position %>
-        <%= f.text_field :position, class: "form-control" %>
-        <br>
-        <%= f.label :description %>
-        <br>
-        <%= f.text_area :description, size: "45x8", class: "form-control" %>
-        <br>
-        <%= f.label :longitude%>
-        <%= f.number_field :longitude, class: "form-control" %>
-        <br>
-        <%= f.label :latitude %>
-        <%= f.number_field :latitude, class: "form-control" %>
 
-        <div class="skills-checkboxes">
-            <h2 class="smallsubtitle">Choose Required Skill(s)</h2>
-            <%= f.collection_check_boxes :skills, @skills, :id, :name %>
-        </div>
-        <br>
-        <div class="container-login100-form-btn">
 
-        <div class="wrap-login100-form-btn">
-        <div class="login100-form-bgbtn"></div>
-        <button class="login100-form-btn">
-           <%= f.submit "Submit", class: 'login100-form-btn' %>
-          </button>
-  </div>
-  </div>
-
-    </div>
-    <% end %>
+<%= react_component('JobForm', { userId: @user_id, allSkills: @skills }) %>

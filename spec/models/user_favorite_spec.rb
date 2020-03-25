@@ -8,6 +8,7 @@ RSpec.describe UserFavorite, type: :model do
     described_class.new(
       user_id: User.create(email:"blahblah@yahoo.com",password:"123456", employer:false).id,
       job_id: Job.create(
+        company_name: 'SoftSearch',
         position: "sr. dev",
         description: "Loremh",
         longitude: -80.2,
