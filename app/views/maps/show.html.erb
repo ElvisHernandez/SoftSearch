@@ -8,8 +8,8 @@
     API_KEY: ENV['MAPBOX_KEY'],
     jobs: @jobs,
     all_skills: Skill.all,
-    userID: current_user ? 
-    current_user.id : nil
+    currentUser: current_user ? 
+    current_user : nil
 
 }) %>
     </div>  

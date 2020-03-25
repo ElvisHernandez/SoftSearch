@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 
   authenticated :user, ->(u) { !u.employer } do
     namespace :applicants do
+      get 'users/:user_id/favorites', to: 'users#index'
+      post '/users/:user_id/favorites', to: 'users#create'
+      delete 'users/:user_id/favorites', to: 'users#destroy'
       resources :users, only: [:index] do
         resources :job_applications
         get '/:job_id/job_applications/new', to: 'job_applications#new'
