@@ -5,17 +5,30 @@
     <table class="table">
         <thead>
             <tr>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">ID</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">Job</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-700">position</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-700">description</th>
                 <th class="p-3 uppercase text-left text-xs text-gray-700">date</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-700">Longitude</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-700">Latitude</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-700">Skills</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-700">Employer</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
             </tr>
         </thead>
         <tbody>
-            <% @user_favorites.each do |favorite| %>
+            <% @user_favorites.each do |user_favorite| %>
             <tr class="group border-t border-gray-400 hover:bg-gray-100">
-                <td class="p-3"><%= favorite.user_id %></td>
-                <td class="p-3"><%= favorite.job_id %></td>
-                <%= link_to "View", "user_favorites/#{favorite.id}", class: "btn btn-link no-underline" %>
+                <td class="p-3"><%= user_favorite.job.position %></td>
+                <td class="p-3"><%= user_favorite.job.description %></td>
+                <td class="p-3"><%= user_favorite.job.created_at %></td>
+                <td class="p-3"><%= user_favorite.job.longitude %></td>
+                <td class="p-3"><%= user_favorite.job.latitude %></td>
+                <td class="p-3"><%= user_favorite.job.skill_names %></td>
+                <td class="p-3"><%= user_favorite.job.user.email %></td>
+                <td>
+
+
+
                 </td>
             </tr>
             <% end %>

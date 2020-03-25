@@ -3,7 +3,12 @@ class Applicants::UsersController < Applicants::UserBaseController
   skip_before_action :verify_authenticity_token
 
   def index
-      @user_favorites = UserFavorite.all
+
+    user_id = params['user_id']
+
+      @user_favorites = User.find(user_id).user_favorites
+      puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////#{@user_favorites}"
+
   end
 
   def create
