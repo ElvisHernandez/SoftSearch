@@ -7,13 +7,13 @@ const SkillForm = ({ userId, allSkills }) => {
     const [ query, setQuery ] = useState('')
     const [ skills, setSkills ] = useState(allSkills)
 
-    console.log(skills)
+    // console.log(skills)
     useEffect(() => {
         if (!query) return
         axios.post(`/employers/admins/${userId}/add_skill`, {
             skill: query
           })
-          .then( res => console.log(res))
+          .then( ({ data: { skills } }) => setSkills(skills))
           .catch(err => console.log(err));
     },[query])
 
@@ -27,11 +27,11 @@ const SkillForm = ({ userId, allSkills }) => {
     return(
         <div>
             <form action="">
-                {skills.map( ({ name },index) => (
-                    <>
-                        <input key={index} type="checkbox" value={name} />
+                {skills.map( ({ name, id },index) => (
+                    <span key={index} >
+                        <input type="checkbox" value={name} />
                         <label style={{marginRight:'1rem'}} htmlFor={name}>{name}</label>
-                    </>
+                    </span>
                 ))}
             </form>
             <form action="#" onSubmit={handleSubmit} >
