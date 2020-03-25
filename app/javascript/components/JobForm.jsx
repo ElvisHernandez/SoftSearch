@@ -18,7 +18,6 @@ const JobForm = ({ userId, allSkills }) => {
 
 
     function handleClick(e) {
-        // e.preventDefault()
         const formattedSearch = search.charAt(0).toUpperCase() + search.slice(1)
         setQuery(formattedSearch)
         console.log(formattedSearch)
@@ -38,19 +37,18 @@ const JobForm = ({ userId, allSkills }) => {
                     <input type="text" name="position" className="form-control"/>
 
                     <label htmlFor="description">Description:</label>
-                    <input type="text" name="Description" className="form-control"/>
+                    <input type="text" name="description" className="form-control"/>
 
-                    <label htmlFor="adress:">Address</label>
-                    <input type="text" name="Address" className="form-control"/>
-
+                    <label htmlFor="adress:">Address (format: street address, city, state)</label>
+                    <input type="text" name="address" className="form-control"/>
 
                     <div className="skills-checkboxes">
                         <h2 className="smallsubtitle">Choose Required Skill(s)</h2>
 
-                        {skills.map(({ name },index) => (
+                        {skills.map(({ name, id },index) => (
                             <span key={index} >
-                                <input type="checkbox" name={name} value={name} />
-                                <label style={{marginRight:'1rem'}} htmlFor={name}>{name}</label>
+                                <input type="checkbox" name='skills[]' value={id} />
+                                <label style={{marginRight:'1rem'}} htmlFor={id}>{name}</label>
                             </span>
                         ))}
                     </div>
