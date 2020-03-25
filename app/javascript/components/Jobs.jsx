@@ -19,7 +19,6 @@ const Jobs = ({ jobs, loading, currentUser }) => {
             })
         })
         .catch(err => console.log(err))
-        
     },[])
 
     function handleClick(e,jobId) {
@@ -58,7 +57,6 @@ const Jobs = ({ jobs, loading, currentUser }) => {
                             <a style={{backgroundColor:'rgb(47, 120, 243)'}} href={`/applicants/users/${currentUser.id}/${properties.id}/job_applications/new`} 
                             className="btn btn-primary">Apply Now</a>
                         }
-
                         <button id="unfav" name={properties.id} style={{backgroundColor:'rgb(47, 120, 243)',marginLeft:'1rem'}} 
                         className="btn btn-primary" onClick={ e => handleClick(e,properties.id)}>Favorite</button>
                     </div>
