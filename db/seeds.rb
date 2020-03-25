@@ -8,7 +8,15 @@
 # User.create_or_find_by!(email: 'Trystan@gmail.com', password: '12sdfs3456', employer: false)
 # User.create_or_find_by!(email: 'Shawn@gmail.com', password: '12345sdfs6', employer: false)
 
-# 1000.times do
+# 100.times do 
+#   User.create_or_find_by!(
+#     email: Faker::Internet.email,
+#     password: Faker::Lorem.characters(number: 10),
+#     employer: true
+#   )
+# end
+
+# 100.times do
 #   employers = User.where(employer: true)
 #   Job.create_or_find_by(
 #     company_name: Faker::Company.name,
@@ -47,7 +55,7 @@
 #   Skill.create_or_find_by!(name: skill)
 # end
 
-Job.all.each do |job|
-  skills = Skill.all
-  JobSkill.create_or_find_by!(job_id: job.id, skill_id: skills[rand(0...skills.length)].id)
-end
+# Job.all.each do |job|
+#   skills = Skill.all
+#   JobSkill.create_or_find_by!(job_id: job.id, skill_id: skills[rand(0...skills.length)].id)
+# end

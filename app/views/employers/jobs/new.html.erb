@@ -13,7 +13,7 @@
         <br>
         <%= f.text_area :description, size: "45x8", class: "form-control" %>
         <br>
-        <%= f.label :longitude%>
+        <%= f.label :longitude %>
         <%= f.number_field :longitude, class: "form-control" %>
         <br>
         <%= f.label :latitude %>
@@ -22,6 +22,11 @@
         <div class="skills-checkboxes">
             <h2 class="smallsubtitle">Choose Required Skill(s)</h2>
             <%= f.collection_check_boxes :skills, @skills, :id, :name %>
+
+
+            <%= react_component('SkillForm', { userId: @user_id }) %>
+
+
         </div>
         <br>
         <div class="container-login100-form-btn">

@@ -21,6 +21,7 @@ module MetaData
     # creates jobs and returns them as a collection
     def self.jobs(id)
     Job.create(
+        company_name: 'SoftSearch',
         position: "sr. dev",
         description: "Loremh",
         longitude: -80.2,
@@ -28,6 +29,7 @@ module MetaData
         user_id: id
                         )
     Job.create(
+        company_name: 'SoftSearch',
         position: "jr. dev",
         description: "Lsdfsdfsforemh",
         longitude: -80.2,

@@ -2,6 +2,7 @@
 
 class Employers::JobsController < Employers::AdminBaseController
   before_action :is_current_user
+  skip_before_action :verify_authenticity_token
 
   def index
     @user_id = params['admin_id']
@@ -47,6 +48,11 @@ class Employers::JobsController < Employers::AdminBaseController
     puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////#{response}"
 
     redirect_to employers_admin_apps_path
+  end
+
+  def add_skill
+    skill_to_add = params['skill']
+    Skill.create(name: skill_to_add)
   end
 
   private

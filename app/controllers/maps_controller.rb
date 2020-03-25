@@ -3,7 +3,7 @@ class MapsController < ApplicationController
 
     def show 
         location = params['location']
-        coords = [-80.1918,25.7617]
+        # coords = [-80.1918,25.7617]
 
         if(location == "GET_ALL")
             @jobs = { job_data: Job.append_skills(Job.all), coords: [-98.5795,39.8283] }
