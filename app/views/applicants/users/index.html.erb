@@ -33,10 +33,13 @@
                 <td class="p-3"><%= user_favorite.job.skill_names %></td>
                 <td class="p-3"><%= user_favorite.job.user.email %></td>
                 <td>
+                
+                <%= link_to "Apply Now", "/applicants/users/#{current_user.id}/#{user_favorite.job.id}/job_applications/new",
+                class: "btn btn-link no-underline", data: { confirm: "Are you sure?" } %>
+
                 <%= link_to "Delete", "/applicants/users/#{user_favorite.user.id}/favorites?jobId=#{user_favorite.job.id}",
                 class: "btn btn-link no-underline", method: :delete, data: { confirm: "Are you sure?" } %>
-
-
+                
                 </td>
             </tr>
             <% end %>
