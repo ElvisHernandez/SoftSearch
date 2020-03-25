@@ -20,7 +20,7 @@ const style = {
     borderRadius: '10px'
 }
 
-const Map = ({ API_KEY, jobs, all_skills, userID }) => {
+const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
     const [filteredJobs, setFilteredJobs] = useState([])
     const [apiJobs, setApiJobs] = useState([])
     const [visibleSkills, setVisibleSkills] = useState(Object.keys(jobs.job_data[1]))
@@ -182,7 +182,7 @@ const Map = ({ API_KEY, jobs, all_skills, userID }) => {
             <div id='map-and-listings'>
                 
                 <div id="listings-and-page-numbers">
-                    <Jobs userID={userID} jobs={currentJobs} loading={loading} />
+                    <Jobs userID={currentUser.id} jobs={currentJobs} loading={loading} />
                 </div>
                 <div id='map' style={style}></div>
             </div>

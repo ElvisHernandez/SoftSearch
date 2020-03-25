@@ -11,7 +11,6 @@ const Jobs = ({ jobs, loading, userID }) => {
                 <li>
                     <div key={index} className="card m-0 h-auto w-100">
                         <div className="card-body py-auto">
-                            
                             <h6 className="card-title">{properties.position}</h6>
                             <h6>{properties.company_name}</h6>
                             <p className="card-text">{properties.description}</p>
