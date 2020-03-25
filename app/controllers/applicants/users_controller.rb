@@ -11,12 +11,8 @@ class Applicants::UsersController < Applicants::UserBaseController
     if(!%i[jobId user_id].all? { |s| params.has_key? s })
       return
     end
-
     job_id = params['jobId']
     user_id = params['user_id']
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////////////#{job_id}"
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////////////#{user_id}"
-
     user_favorite = UserFavorite.create(user_id: user_id, job_id: job_id)
 
     render json: { favoriteId: user_favorite['id'] }
@@ -27,12 +23,18 @@ class Applicants::UsersController < Applicants::UserBaseController
     end
     
   def destroy
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////////////#{params}"
+    job_id = params['jobId']
+    user_id = params['user_id']
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////////////#{job_id}"
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////////////#{user_id}"
 
-    
-    # @user_favorite = UserFavorite.find(params[:id])
-    # @user_favorite.destroy!
-    # redirect_to '/applicants/favorites', :notice => "Your favorite has been deleted"
+    user_favorite = UserFavorite.where(user_id: user_id, job_id: job_id)[0]
+    if(user_favorite)
+      user_favorite.destroy
+      render json: { message: 'success' }
+    else
+      return
+    end
   end
   
   private
