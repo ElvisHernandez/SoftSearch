@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const SkillForm = ({ userId, allSkills }) => {
+const JobForm = ({ userId, allSkills }) => {
     const [ search, setSearch ] = useState('')
     const [ query, setQuery ] = useState('')
     const [ skills, setSkills ] = useState(allSkills)
@@ -29,7 +29,7 @@ const SkillForm = ({ userId, allSkills }) => {
             <div className="wrap-login post-page">
                 <h1 className="subtitles-login-page">Post a Job Listing</h1>
 
-                <form action="" className="subheading-subtitles-posting" >
+                <form action={`/employers/admins/${userId}/jobs`} method="post" className="subheading-subtitles-posting" >
 
                     <label htmlFor="company_name">Company:</label>
                     <input type="text" name="company_name" className="form-control"/>
@@ -37,12 +37,11 @@ const SkillForm = ({ userId, allSkills }) => {
                     <label htmlFor="position">Position:</label>
                     <input type="text" name="position" className="form-control"/>
 
-                    <label htmlFor="Description">Description:</label>
+                    <label htmlFor="description">Description:</label>
                     <input type="text" name="Description" className="form-control"/>
 
-                    <label htmlFor="Adress:">Address</label>
+                    <label htmlFor="adress:">Address</label>
                     <input type="text" name="Address" className="form-control"/>
-
 
 
                     <div className="skills-checkboxes">
@@ -50,15 +49,18 @@ const SkillForm = ({ userId, allSkills }) => {
 
                         {skills.map(({ name },index) => (
                             <span key={index} >
-                                <input type="checkbox" value={name} />
+                                <input type="checkbox" name={name} value={name} />
                                 <label style={{marginRight:'1rem'}} htmlFor={name}>{name}</label>
                             </span>
                         ))}
                     </div>
 
                     <div style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-                        <input name="newSkill" type="text" style={{height:'2.5rem'}} className="form-control w-50" onChange={e => setSearch(e.target.value)} />
-                        <input style={{backgroundColor:'#2F78F3', height:'2.5rem'}} type="button" value="+ SKILL" className='banner_input-button' onClick={handleClick} />
+                        <input name="newSkill" type="text" style={{height:'2.5rem'}} 
+                        className="form-control w-50" onChange={e => setSearch(e.target.value)} />
+
+                        <input style={{backgroundColor:'#2F78F3', height:'2.5rem'}} type="button" 
+                        value="+ SKILL" className='banner_input-button' onClick={handleClick} />
                     </div>
 
                     <br/>
@@ -77,4 +79,4 @@ const SkillForm = ({ userId, allSkills }) => {
     )
 }
 
-export default SkillForm
+export default JobForm
