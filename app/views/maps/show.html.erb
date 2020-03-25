@@ -1,9 +1,8 @@
-<h1 style='text-align:center; margin-bottom:2rem'>Map Page</h1>
 
-<div style='text-align:center; margin-bottom:5rem'>
-    <%= link_to 'Home', root_path %>
-</div>
+<div class='top-section'>
+    <%= react_component "NavigationHome", { isSignedIn: current_user } %>
 
+<header class="top-banner-homepage background-banner map-banner">
 <%= react_component('Map', 
 {
     API_KEY: ENV['MAPBOX_KEY'],
@@ -13,3 +12,12 @@
     current_user.id : nil
 
 }) %>
+    </div>  
+
+
+</header>
+</div>
+
+
+
+

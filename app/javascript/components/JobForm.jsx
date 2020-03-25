@@ -6,7 +6,6 @@ const JobForm = ({ userId, allSkills }) => {
     const [ query, setQuery ] = useState('')
     const [ skills, setSkills ] = useState(allSkills)
 
-    // console.log(skills)
     useEffect(() => {
         if (!query) return
         axios.post(`/employers/admins/${userId}/add_skill`, {
