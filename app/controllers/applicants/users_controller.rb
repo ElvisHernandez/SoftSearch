@@ -25,8 +25,6 @@ class Applicants::UsersController < Applicants::UserBaseController
   def destroy
     job_id = params['jobId']
     user_id = params['user_id']
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////////////#{job_id}"
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////////////#{user_id}"
 
     user_favorite = UserFavorite.where(user_id: user_id, job_id: job_id)[0]
     if(user_favorite)

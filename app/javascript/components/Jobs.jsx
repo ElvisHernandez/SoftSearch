@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import axios from 'axios'
 
 const Jobs = ({ jobs, loading, currentUser }) => {
-    const [ isFav, setIsFav ] = useState(false)
 
     if(loading) {
         return <h2>Loading...</h2>
@@ -19,6 +18,7 @@ const Jobs = ({ jobs, loading, currentUser }) => {
                 }
             })
             .catch(err => console.log(err))
+            
         } else {
             axios.delete(`/applicants/users/${currentUser.id}/favorites`, {
                 params: { jobId }
