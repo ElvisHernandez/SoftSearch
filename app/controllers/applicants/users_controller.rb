@@ -17,9 +17,9 @@ class Applicants::UsersController < Applicants::UserBaseController
     puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////////////#{job_id}"
     puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////////////#{user_id}"
 
-    UserFavorite.create(user_id: user_id, job_id: job_id)
+    user_favorite = UserFavorite.create(user_id: user_id, job_id: job_id)
 
-
+    render json: { favoriteId: user_favorite['id'] }
   end
 
   def show
@@ -27,9 +27,12 @@ class Applicants::UsersController < Applicants::UserBaseController
     end
     
   def destroy
-  @user_favorite = UserFavorite.find(params[:id])
-  @user_favorite.destroy!
-  redirect_to '/applicants/favorites', :notice => "Your favorite has been deleted"
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////////////#{params}"
+
+    
+    # @user_favorite = UserFavorite.find(params[:id])
+    # @user_favorite.destroy!
+    # redirect_to '/applicants/favorites', :notice => "Your favorite has been deleted"
   end
   
   private

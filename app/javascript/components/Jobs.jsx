@@ -1,16 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 
 const Jobs = ({ jobs, loading, currentUser }) => {
+    const [ isFav, setIsFav ] = useState(false)
+
     if(loading) {
         return <h2>Loading...</h2>
     }
 
     function handleClick(e,jobId) {
+        e.persist()
+
         if (e.target.id === 'unfav') {
-            axios.post(`/applicants/users/${currentUser.id}/favorites`,{
-                jobId
+            axios.post(`/applicants/users/${currentUser.id}/favorites`,{ jobId })
+            .then( ({ data }) => {
+                if (data) {
+                    e.target.id = 'fav'
+                }
             })
+            .catch(err => console.log(err))
+        } else {
+            axios.delete()
         }
     }
 
