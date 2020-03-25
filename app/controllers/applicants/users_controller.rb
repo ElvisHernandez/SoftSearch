@@ -3,12 +3,8 @@ class Applicants::UsersController < Applicants::UserBaseController
   skip_before_action :verify_authenticity_token
 
   def index
-
     user_id = params['user_id']
-
-      @user_favorites = User.find(user_id).user_favorites
-      puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////#{@user_favorites}"
-
+    @user_favorites = User.find(user_id).user_favorites
   end
 
   def create
@@ -31,10 +27,13 @@ class Applicants::UsersController < Applicants::UserBaseController
     job_id = params['jobId']
     user_id = params['user_id']
 
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////#{params}"
+
+
     user_favorite = UserFavorite.where(user_id: user_id, job_id: job_id)[0]
     if(user_favorite)
       user_favorite.destroy
-      render json: { message: 'success' }
+      redirect_to "/applicants/users/#{user_id}/favorites"
     else
       return
     end

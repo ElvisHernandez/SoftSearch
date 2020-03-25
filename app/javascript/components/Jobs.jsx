@@ -23,9 +23,8 @@ const Jobs = ({ jobs, loading, currentUser }) => {
             axios.delete(`/applicants/users/${currentUser.id}/favorites`, {
                 params: { jobId }
             }).then( ({ data }) => {
-                if (data) {
-                    e.target.id = 'unfav'
-                }
+                console.log(data)
+                e.target.id = 'unfav'
             })
             .catch(err => console.log(err))
         }

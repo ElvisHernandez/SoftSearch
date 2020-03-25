@@ -1,4 +1,5 @@
 <a href="/applicants/users" class="btn btn-md u-btn-primary g-mr-10 g-mb-15">Job Favorites</a>
+<%= link_to 'Home', root_path, class: "btn btn-link no-underline" %>
 <hr />
 <% if @user_favorites.exists? %>
 <div class="bg-white rounded shadow table-responsive" style="width: 90vw;">
@@ -26,7 +27,8 @@
                 <td class="p-3"><%= user_favorite.job.skill_names %></td>
                 <td class="p-3"><%= user_favorite.job.user.email %></td>
                 <td>
-
+                <%= link_to "Delete", "/applicants/users/#{user_favorite.user.id}/favorites?jobId=#{user_favorite.job.id}",
+                class: "btn btn-link no-underline", method: :delete, data: { confirm: "Are you sure?" } %>
 
 
                 </td>
