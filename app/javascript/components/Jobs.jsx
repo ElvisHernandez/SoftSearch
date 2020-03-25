@@ -9,11 +9,9 @@ const Jobs = ({ jobs, loading, currentUser }) => {
     function handleClick(e,jobId) {
         if (e.target.id === 'unfav') {
             axios.post(`/applicants/users/${currentUser.id}/favorites`,{
-
+                jobId
             })
         }
-
-
     }
 
     return(

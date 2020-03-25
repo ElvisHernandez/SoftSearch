@@ -1,11 +1,24 @@
 class Applicants::UsersController < Applicants::UserBaseController
   before_action :is_current_user
+  skip_before_action :verify_authenticity_token
 
   def index
       @user_favorites = UserFavorite.all
   end
 
   def create
+
+    if(!%i[jobId user_id].all? { |s| params.has_key? s })
+      return
+    end
+
+    job_id = params['jobId']
+    user_id = params['user_id']
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////////////#{job_id}"
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////////////#{user_id}"
+
+    UserFavorite.create(user_id: user_id, job_id: job_id)
+
 
   end
 
