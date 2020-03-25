@@ -21,10 +21,10 @@
 
         <div class="skills-checkboxes">
             <h2 class="smallsubtitle">Choose Required Skill(s)</h2>
-            <%= f.collection_check_boxes :skills, @skills, :id, :name %>
+            <%# <%= f.collection_check_boxes :skills, @skills, :id, :name %> 
 
 
-            <%= react_component('SkillForm', { userId: @user_id }) %>
+            <%= react_component('SkillForm', { userId: @user_id, allSkills: @skills }) %>
 
 
         </div>
