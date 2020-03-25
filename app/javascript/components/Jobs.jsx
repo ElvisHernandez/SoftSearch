@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Jobs = ({ jobs, loading, userID }) => {
+const Jobs = ({ jobs, loading, currentUser }) => {
     if(loading) {
         return <h2>Loading...</h2>
     }
@@ -15,8 +15,9 @@ const Jobs = ({ jobs, loading, userID }) => {
                             <h6>{properties.company_name}</h6>
                             <p className="card-text">{properties.description}</p>
                             <p>Skills required: {properties.skills.map( ({ name }) => name).join(', ')} | Posted on: {properties.created_at.split("T")[0]}</p>
-                            {/* <p>Posted on: {properties.created_at.split("T")[0]}</p> */}
-                            <a href={`/applicants/users/${userID}/${properties.id}/job_applications/new`} className="btn btn-primary">Apply Now</a>
+                            <a style={{backgroundColor:'rgb(47, 120, 243)'}}href={`/applicants/users/${currentUser.id}/${properties.id}/job_applications/new`} 
+                            className="btn btn-primary">Apply Now</a>
+                            <button style={{backgroundColor:'rgb(47, 120, 243)',marginLeft:'1rem'}} className="btn btn-primary">Favorite</button>
                         </div>
                     </div>
                 </li>

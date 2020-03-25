@@ -182,7 +182,7 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
             <div id='map-and-listings'>
                 
                 <div id="listings-and-page-numbers">
-                    <Jobs userID={currentUser.id} jobs={currentJobs} loading={loading} />
+                    <Jobs currentUser={currentUser} jobs={currentJobs} loading={loading} />
                 </div>
                 <div id='map' style={style}></div>
             </div>
