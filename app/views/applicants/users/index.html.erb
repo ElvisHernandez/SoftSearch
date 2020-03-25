@@ -1,5 +1,11 @@
-<a href="/applicants/users" class="btn btn-md u-btn-primary g-mr-10 g-mb-15">Job Favorites</a>
-<%= link_to 'Home', root_path, class: "btn btn-link no-underline" %>
+
+<div class='top-section'>
+    <%= react_component "NavigationHome", { isSignedIn: current_user } %>
+
+    <header class="top-banner-homepage background-banner map-banner"><h1>Job Favorites</h1>
+    <hr>
+    </header>
+    </div>
 <hr />
 <% if @user_favorites.exists? %>
 <div class="bg-white rounded shadow table-responsive" style="width: 90vw;">

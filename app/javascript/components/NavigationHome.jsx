@@ -5,7 +5,7 @@ const Navigation = ({ isSignedIn }) => {
   return (
     <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3">
       <h5 className="my-0 mr-md-auto font-weight-normal">kdpmfss Logo</h5>
-      <img src={logo} alt="#" className="logo-img" />
+      <a href="/"><img src={logo} alt="#" className="logo-img" /></a>
       <nav id="navlinks" className="my-2 my-md-0 mr-md-4">
         {isSignedIn && isSignedIn.employer &&
           <a className="p-2 text-white" href={`/employers/admins/${isSignedIn.id}/jobs`}>Post a Job</a>
