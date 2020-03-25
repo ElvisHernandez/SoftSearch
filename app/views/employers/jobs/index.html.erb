@@ -1,5 +1,11 @@
+<div class='top-section'>
+    <%= react_component "NavigationHome", { isSignedIn: current_user } %>
+    
+    <header class="top-banner-homepage background-banner map-banner"><h1>Employer Dashboard</h1>
+    <hr>
+    </header>
+</div>
 
-<hr>
 <a href=<%= employers_admin_apps_path	%> class="btn btn-md u-btn-primary g-mr-10 g-mb-15">VIEW APPLICANTS</a>
 <a href=<%="/employers/admins/#{@user_id}/jobs/new"%> class="btn btn-md u-btn-primary g-mr-10 g-mb-15">+POST ANOTHER JOB</a>
 

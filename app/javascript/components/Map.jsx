@@ -186,7 +186,7 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
                 </div>
                 <div id='map' style={style}></div>
             </div>
-            <div style={{position:'fixed',bottom:'0'}}>
+            <div style={{  }}>
                 <Pagination jobsPerPage={jobsPerPage} totalJobs={filteredJobs.length} paginate={paginate} />
             </div>
         </>

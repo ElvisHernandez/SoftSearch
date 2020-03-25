@@ -1,5 +1,12 @@
-<h1>All your Job Apps</h1>
-<hr />
+
+<div class='top-section'>
+    <%= react_component "NavigationHome", { isSignedIn: current_user } %>
+    
+    <header class="top-banner-homepage background-banner map-banner"><h1>Job Applications</h1>
+    <hr>
+    </header>
+</div>
+
 
 <% @jobs.each do |job| %>
     <% job.job_apps.each do |job_app| %>
