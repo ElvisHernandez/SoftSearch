@@ -53,7 +53,7 @@ class Employers::JobsController < Employers::AdminBaseController
   def add_skill
     skill_to_add = params['skill']
     Skill.create(name: skill_to_add)
-    render json: { skills: Skill.all}
+    render json: { skills: Skill.all }
   end
 
   private
