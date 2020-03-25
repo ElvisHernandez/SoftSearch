@@ -15,7 +15,7 @@ import {
 } from './mapFunctions'
 
 const style = {
-    width: "100rem",
+    width: "60vw",
     height: "100vh"
 }
 
@@ -178,7 +178,9 @@ const Map = ({ API_KEY, jobs, all_skills, userID }) => {
                 </div>
                 <div id='map' style={style}></div>
             </div>
-            <Pagination jobsPerPage={jobsPerPage} totalJobs={filteredJobs.length} paginate={paginate} />
+            <div style={{position:'fixed',bottom:'0'}}>
+                <Pagination jobsPerPage={jobsPerPage} totalJobs={filteredJobs.length} paginate={paginate} />
+            </div>
         </>
     )
 }

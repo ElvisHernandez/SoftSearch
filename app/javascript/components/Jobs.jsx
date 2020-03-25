@@ -8,15 +8,19 @@ const Jobs = ({ jobs, loading, userID }) => {
     return(
         <ul id='listings' className='list-group mb-4'>
             {jobs.map(({properties},index) => (
-                <div key={index} className="card m-0 w-100">
-                    {/* {console.log(properties.id)} */}
-
-                    <div className="card-body">
-                        <h5 className="card-title">{properties.position}</h5>
-                        <p className="card-text">{properties.description}</p>
-                        <a href={`/applicants/users/${userID}/${properties.id}/job_applications/new`} className="btn btn-primary">Apply Now</a>
+                <li>
+                    <div key={index} className="card m-0 h-auto w-100">
+                        <div className="card-body">
+                            
+                            <h6 className="card-title">{properties.position}</h6>
+                            <h6>{properties.company_name}</h6>
+                            <p className="card-text">{properties.description}</p>
+                            <p>Skills required: {properties.skills.map( ({ name }) => name).join(', ')} | Posted on: {properties.created_at.split("T")[0]}</p>
+                            {/* <p>Posted on: {properties.created_at.split("T")[0]}</p> */}
+                            <a href={`/applicants/users/${userID}/${properties.id}/job_applications/new`} className="btn btn-primary">Apply Now</a>
+                        </div>
                     </div>
-                </div>
+                </li>
             ))}
         </ul>
     )
