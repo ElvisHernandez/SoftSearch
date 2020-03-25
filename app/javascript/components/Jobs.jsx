@@ -10,7 +10,7 @@ const Jobs = ({ jobs, loading, userID }) => {
             {jobs.map(({properties},index) => (
                 <li>
                     <div key={index} className="card m-0 h-auto w-100">
-                        <div className="card-body">
+                        <div className="card-body py-auto">
                             
                             <h6 className="card-title">{properties.position}</h6>
                             <h6>{properties.company_name}</h6>

@@ -16,7 +16,7 @@ import {
 
 const style = {
     width: "60vw",
-    height: "100vh",
+    height: "1090px",
     borderRadius: '10px'
 }
 
@@ -156,12 +156,12 @@ const Map = ({ API_KEY, jobs, all_skills, userID }) => {
                     {currentSkills.map( (name,index) => (
                         <button id="skill-button" className={`btn btn-md u-btn-outline-primary g-mr-10 g-mb-15 
                         ${visibleSkills.includes(name) ? 'active':"inactive"}`} 
-                        name={name} key={index} onClick={skillFilter}>{visibleSkills.includes(name) ? '-':"+"}{name}</button>))
+                        name={name} key={index} onClick={skillFilter}>{visibleSkills.includes(name) ? '- ':"+ "}{name}</button>))
                     }
                 </div>
             </div>
 
-            <form id="map-search-bar" className="form-inline mr-auto" style={{display:'flex',justifyContent:'space-between',
+            <form id="map-search-bar" className="form-inline mr-auto" style={{display:'flex',justifyContent:'space-around',
             alignItems:'center',marginBottom:'1rem',left:'0'}}  onSubmit={e => { e.preventDefault()
                                                                         setQuery(search)  }}>
                 <div>                                                                            
@@ -182,11 +182,6 @@ const Map = ({ API_KEY, jobs, all_skills, userID }) => {
             <div id='map-and-listings'>
                 
                 <div id="listings-and-page-numbers">
-                    {/* <form id="map-search-bar" className="form-inline mr-auto" style={{marginBottom:'1rem'}}  onSubmit={e => { e.preventDefault()
-                                                                        setQuery(search)  }}>
-                        <input id="map-search-input" className="form-control mr-sm-2" type="text" name={query} onChange={e => setSearch(e.target.value)}/>
-                        <input className='banner_input-button' type="submit"/>
-                    </form> */}
                     <Jobs userID={userID} jobs={currentJobs} loading={loading} />
                 </div>
                 <div id='map' style={style}></div>
