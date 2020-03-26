@@ -54,11 +54,14 @@ const Jobs = ({ jobs, loading, currentUser }) => {
                         <p className="card-text">{properties.description}</p>
                         <p>Skills required: {properties.skills.map( ({ name }) => name).join(', ')} | Posted on: {properties.created_at.split("T")[0]}</p>
                         {currentUser && 
-                            <a style={{backgroundColor:'rgb(47, 120, 243)'}} href={`/applicants/users/${currentUser.id}/${properties.id}/job_applications/new`} 
-                            className="btn btn-primary">Apply Now</a>
+                            <>
+                                <a style={{backgroundColor:'rgb(47, 120, 243)'}} href={`/applicants/users/${currentUser.id}/${properties.id}/job_applications/new`} 
+                                className="btn btn-primary">Apply Now</a>
+
+                                <button id="unfav" name={properties.id} style={{backgroundColor:'rgb(47, 120, 243)',marginLeft:'1rem'}} 
+                                className="btn btn-primary" onClick={ e => handleClick(e,properties.id)}>Favorite</button>
+                            </>
                         }
-                        <button id="unfav" name={properties.id} style={{backgroundColor:'rgb(47, 120, 243)',marginLeft:'1rem'}} 
-                        className="btn btn-primary" onClick={ e => handleClick(e,properties.id)}>Favorite</button>
                     </div>
                 </div>
             ))}

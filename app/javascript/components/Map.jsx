@@ -47,6 +47,17 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
     useEffect(() => {
         if(!filteredJobs.length) return
         setLoading(false)
+        if(!currentUser) return;
+        axios(`/applicants/users/${currentUser.id}/all_favorites`)
+        .then(({ data: { userFavorites } }) => {
+            const favoritesIds = userFavorites.map(({ job_id }) =>  job_id )
+            filteredJobs.forEach( ({ properties: { id }}) => {
+                if (favoritesIds.includes(id)) {
+                    document.getElementsByName(id)[0].id = 'fav'
+                }
+            })
+        })
+        .catch(err => console.log(err))
     },[filteredJobs])
 
 
