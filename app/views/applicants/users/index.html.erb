@@ -1,25 +1,24 @@
 
 <div class='top-section'>
     <%= react_component "NavigationHome", { isSignedIn: current_user } %>
-
-    <header class="top-banner-homepage background-banner map-banner"><h1>Job Favorites</h1>
+    </div>
+        <header class="inner-page-headers"><h1>Job Favorites</h1>
     <hr>
     </header>
-    </div>
 <hr />
 <% if @user_favorites.exists? %>
 <div class="bg-white rounded shadow table-responsive" style="width: 90vw;">
     <table class="table">
         <thead>
             <tr>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">Company</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">position</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">description</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">date</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">Address</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">Skills</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">Employer</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color">Company</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color">position</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color">description</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color">date</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color">Address</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color">Skills</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color">Employer</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color w-20">Actions</th>
             </tr>
         </thead>
         <tbody>
