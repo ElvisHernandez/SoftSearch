@@ -151,16 +151,6 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
 
     return(
         <>                        
-            <div id="skills">
-                <div>
-                    {currentSkills.map( (name,index) => (
-                        <button id="skill-button" className={`btn btn-md u-btn-outline-primary g-mr-10 g-mb-15 
-                        ${visibleSkills.includes(name) ? 'active':"inactive"}`} 
-                        name={name} key={index} onClick={skillFilter}>{visibleSkills.includes(name) ? '- ':"+ "}{name}</button>))
-                    }
-                </div>
-            </div>
-
             <form id="map-search-bar" className="form-inline mr-auto" style={{display:'flex',justifyContent:'space-around',
             alignItems:'center',marginBottom:'1rem',left:'0'}}  onSubmit={e => { e.preventDefault()
                                                                         setQuery(search)  }}>
@@ -178,6 +168,15 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
                     }
                 </div>
             </form>
+            <div id="skills" style={{position:'sticky',top:'0', zIndex:'1'}}>
+                <div>
+                    {currentSkills.map( (name,index) => (
+                        <button id="skill-button" className={`btn btn-md u-btn-outline-primary g-mr-10 g-mb-15 
+                        ${visibleSkills.includes(name) ? 'active':"inactive"}`} 
+                        name={name} key={index} onClick={skillFilter}>{visibleSkills.includes(name) ? '- ':"+ "}{name}</button>))
+                    }
+                </div>
+            </div>
 
             <div id='map-and-listings'>
                 

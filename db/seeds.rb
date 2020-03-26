@@ -48,14 +48,14 @@
 # end 
 
 
-# programming_skills = ['Ruby', 'Python', 'C++', 'Java', 'React', 'C55',
-#                       'Magento', 'SQL', 'C#', 'Swift', 'Objective C', 'Javascript', 'CSS', 'HTML']
+programming_skills = ['Ruby', 'Python', 'C++', 'Java', 'React', 'C55',
+                      'Magento', 'SQL', 'C#', 'Swift', 'Objective C', 'Javascript', 'CSS', 'HTML']
 
-# programming_skills.each do |skill|
-#   Skill.create_or_find_by!(name: skill)
-# end
+programming_skills.each do |skill|
+  Skill.create_or_find_by!(name: skill)
+end
 
-# Job.all.each do |job|
-#   skills = Skill.all
-#   JobSkill.create_or_find_by!(job_id: job.id, skill_id: skills[rand(0...skills.length)].id)
-# end
+Job.all.each do |job|
+  skills = Skill.all
+  JobSkill.create_or_find_by!(job_id: job.id, skill_id: skills[rand(0...skills.length)].id)
+end
