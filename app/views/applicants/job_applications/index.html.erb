@@ -17,6 +17,6 @@
         <% when -1 %> <p class="app-body-red">Current Status: Rejected</h2>
     <% end %>
     <%= link_to 'Delete', "/applicants/users/#{job_app.user['id']}/job_applications/#{job_app['id']}",
-    class: "accept-buttons" method: :delete, data: { confirm: 'Are you sure?' } %>
+    class: "accept-buttons", method: :delete, data: { confirm: 'Are you sure?' } %>
     <hr />
 <% end %>
