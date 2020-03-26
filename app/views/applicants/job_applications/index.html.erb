@@ -7,15 +7,16 @@
     </header>
 
 <% @job_apps.each do |job_app| %>
-    <h1><%= job_app.job['position'] %></h1>
-    <p><%= job_app.job['description'] %></p>
+    <p class="app-body-main"><%= job_app.job['position'] %></h1>
+    <p class="app-body"><%= job_app.job['description'] %></p>
     <p></p>
+
     <% case job_app.status 
-        when 0 %> <h2>Current Status: Pending</h2>
-        <% when 1 %> <h2>Current Status: Accepted</h2>
-        <% when -1 %> <h2>Current Status: Rejected</h2>
+        when 0 %> <p class="app-body-yellow">Current Status: Pending</h2>
+        <% when 1 %> <p class="app-body-green">Current Status: Accepted</h2>
+        <% when -1 %> <p class="app-body-red">Current Status: Rejected</h2>
     <% end %>
     <%= link_to 'Delete', "/applicants/users/#{job_app.user['id']}/job_applications/#{job_app['id']}",
-    method: :delete, data: { confirm: 'Are you sure?' } %>
+    class: "accept-buttons" method: :delete, data: { confirm: 'Are you sure?' } %>
     <hr />
 <% end %>
