@@ -1,10 +1,10 @@
 <div class='top-section'>
     <%= react_component "NavigationHome", { isSignedIn: current_user } %>
-    
-    <header class="top-banner-homepage background-banner map-banner"><h1>Job Applications</h1>
+</div>
+
+    <header class="inner-page-headers"><h1>Job Applications</h1>
     <hr>
     </header>
-</div>
 
 <% @job_apps.each do |job_app| %>
     <h1><%= job_app.job['position'] %></h1>
