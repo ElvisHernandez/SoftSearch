@@ -182,7 +182,6 @@
 
   .post-page {
       width: 700px
-
   }
 
   .chart-color {
@@ -191,6 +190,18 @@
   }
 
   .subheading-color {
+    padding-left: 50px;
+    padding-bottom: 10px;
+    font-size: 16px;
     color: slategray;
     font-family: "MetropolisSemiBold";
+  }
+
+  .table-responsive {
+    padding-left: 50px;
+  }
+
+  .inner-page-headers {
+    padding: 50px 50px 20px;
+    font-family: "MetropolisBold";
   }
