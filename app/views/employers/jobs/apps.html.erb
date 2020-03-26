@@ -1,13 +1,11 @@
 
 <div class='top-section'>
     <%= react_component "NavigationHome", { isSignedIn: current_user } %>
-    
-    <header class="top-banner-homepage background-banner map-banner"><h1>Job Applications</h1>
+</div>
+    <header class="inner-page-headers"><h1>Job Applications</h1>
     <hr>
     </header>
-</div>
-
-
+    <%= link_to 'Dashboard', employers_admin_jobs_path, class: "btn btn-md u-btn-primary g-mr-10 g-mb-15 subheading-color"%>
 <% @jobs.each do |job| %>
     <% job.job_apps.each do |job_app| %>
         <h2>Applicant email: <%= job_app.user.email  %></h2>
@@ -24,7 +22,3 @@
     <% end %>
 <% end %>
 <hr />
-<%= link_to 'Home', root_path,
-class: "btn btn-link no-underline" %>
-<%= link_to 'Dashboard', employers_admin_jobs_path,
-class: "btn btn-link no-underline" %>

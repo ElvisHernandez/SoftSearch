@@ -1,28 +1,27 @@
 <div class='top-section'>
     <%= react_component "NavigationHome", { isSignedIn: current_user } %>
-    
-    <header class="top-banner-homepage background-banner map-banner"><h1>Employer Dashboard</h1>
-    <hr>
-    </header>
 </div>
 
-<a href=<%= employers_admin_apps_path	%> class="btn btn-md u-btn-primary g-mr-10 g-mb-15">VIEW APPLICANTS</a>
-<a href=<%="/employers/admins/#{@user_id}/jobs/new"%> class="btn btn-md u-btn-primary g-mr-10 g-mb-15">+POST ANOTHER JOB</a>
+<header class="inner-page-headers"><h1>Employer Dashboard</h1>
+<hr>
+</header>
+<a href=<%= employers_admin_apps_path	%> class="btn btn-md u-btn-primary g-mr-10 g-mb-15 chart-color subheading-color">VIEW APPLICANTS</a>
+<a href=<%="/employers/admins/#{@user_id}/jobs/new"%> class="btn btn-md u-btn-primary g-mr-10 g-mb-15 subheading-color">+ POST ANOTHER JOB</a>
 
 <% if @jobs.exists? %>
 <div class="bg-white rounded shadow table-responsive" style="width: 90vw;">
     <table class="table">
         <thead>
             <tr>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">ID</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">position</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">description</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">date</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">Longitude</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">Latitude</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">Skills</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700">User</th>
-                <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color">ID</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color">Position</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color">Description</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color">Date</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color">Longitude</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color">Latitude</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color">Skills</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color">User</th>
+                <th class="p-3 uppercase text-left text-xs text-gray-500 chart-color w-20">Actions</th>
             </tr>
         </thead>
         <tbody>
