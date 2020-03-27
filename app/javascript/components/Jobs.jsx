@@ -7,57 +7,32 @@ const Jobs = ({ jobs, loading, currentUser, activeFavorites, setActiveFavorites 
         return <h2>Loading...</h2>
     }
 
-
-    console.log("Jobs: ", jobs.map(({ properties: { id }}) => id ))
-
-
     useEffect(() => {
         if(!currentUser) return;
-        
-        
-
-
         axios(`/applicants/users/${currentUser.id}/all_favorites`)
         .then(({ data: { userFavorites } }) => {
             const favoritesIds = userFavorites.map(({ job_id }) =>  job_id )
-
-            console.log("Favorite IDs: ", favoritesIds)
-
             setActiveFavorites(favoritesIds)
-
         })
         .catch(err => console.log(err))
     },[])
 
-
-
-
-    useEffect(() => {
-        // console.log(activeFavorites)
-    },[activeFavorites])
-
-
-
-
     function handleClick(e,jobId) {
-
         if (e.target.id === 'unfav') {
             axios.post(`/applicants/users/${currentUser.id}/favorites`,{ jobId })
             .then( ({ data }) => {
                 if (data) {
-                    // e.target.id = 'fav'
                     setActiveFavorites([...activeFavorites,jobId])
                 }
-            })
-            .catch(err => console.log(err))
-            
+            }).catch(err => console.log(err))
+
         } else {
             axios.delete(`/applicants/users/${currentUser.id}/favorites`, {
                 params: { jobId }
             }).then( ({ data }) => {
-                e.target.id = 'unfav'
-            })
-            .catch(err => console.log(err))
+                const newActiveFavorites = activeFavorites.filter( fav => fav !== jobId)
+                setActiveFavorites(newActiveFavorites)
+            }).catch(err => console.log(err))
         }
     }
 
