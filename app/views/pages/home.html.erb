@@ -17,10 +17,12 @@
 
     </div>     
     <div class="search-item">
-          <% @skills.each do |skill|%> 
+        <% @skills.each do |skill|%> 
           <a href="#" class="btn btn-md u-btn-outline-primary g-mr-10 g-mb-15">+ <%= skill["name"]%></a>
-      <% end %>
+        <% end %>
     </div>
+
+    <%= react_component('HomePageForm') %>
 </header>
 
 <!-- Skills Cards -->
