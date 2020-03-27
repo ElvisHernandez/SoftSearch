@@ -51,6 +51,7 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
     useEffect(() => {
         if(!query) return
         fetchJobData()
+        setSearch('')
     },[query])
 
     useEffect(() => {
@@ -173,6 +174,7 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
 
     const fetchJobData = async () => {
         const response = await axios.get(`/map/jobs.json?location=${query}`)
+        console.log("API response: ", response)
         setApiJobs(response.data)
     } 
 
@@ -182,7 +184,8 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
             alignItems:'center',marginBottom:'1rem',left:'0'}}  onSubmit={e => { e.preventDefault()
                                                                         setQuery(search)  }}>
                 <div>                                                                            
-                    <input id="map-search-input" className="form-control mr-sm-2" type="text" name={query} onChange={e => setSearch(e.target.value)}/>
+                    <input id="map-search-input" className="form-control mr-sm-2" type="text" value={search} onChange={e => setSearch(e.target.value)}/>
+
                     <input className='banner_input-button' type="submit"/>
                 </div>
                 <div>

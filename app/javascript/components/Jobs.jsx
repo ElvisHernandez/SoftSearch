@@ -7,19 +7,37 @@ const Jobs = ({ jobs, loading, currentUser, activeFavorites, setActiveFavorites 
         return <h2>Loading...</h2>
     }
 
+
+    console.log("Jobs: ", jobs.map(({ properties: { id }}) => id ))
+
+
     useEffect(() => {
         if(!currentUser) return;
+        
+        
+
+
         axios(`/applicants/users/${currentUser.id}/all_favorites`)
         .then(({ data: { userFavorites } }) => {
             const favoritesIds = userFavorites.map(({ job_id }) =>  job_id )
-            jobs.forEach( ({ properties: { id }}) => {
-                if (favoritesIds.includes(id)) {
-                    setActiveFavorites([...activeFavorites, id])
-                }
-            })
+
+            console.log("Favorite IDs: ", favoritesIds)
+
+            setActiveFavorites(favoritesIds)
+
         })
         .catch(err => console.log(err))
     },[])
+
+
+
+
+    useEffect(() => {
+        // console.log(activeFavorites)
+    },[activeFavorites])
+
+
+
 
     function handleClick(e,jobId) {
 
