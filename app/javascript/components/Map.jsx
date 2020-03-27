@@ -25,41 +25,32 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
     const [apiJobs, setApiJobs] = useState([])
     const [visibleSkills, setVisibleSkills] = useState(Object.keys(jobs.job_data[1]))
     const [currentSkills, setCurrentSkills] = useState(Object.keys(jobs.job_data[1]))  // array of current skills in jobs
+    const [activeFavorites, setActiveFavorites] = useState([])
+
+    const mapRef = useRef()
     const [search, setSearch] = useState('')
     const [query, setQuery] = useState('')    
+
+    // get current jobs 
     const [loading, setLoading] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
     const [jobsPerPage] = useState(5)
-    const mapRef = useRef()
-
-    // get current jobs 
     const indexOfLastJob = currentPage * jobsPerPage
     const indexOfFirstJob = indexOfLastJob - jobsPerPage
     const currentJobs = filteredJobs.slice(indexOfFirstJob,indexOfLastJob)
     const paginate = pageNumber => setCurrentPage(pageNumber)
 
-
     useEffect(() => {
         if(!query) return
         fetchJobData()
+        setSearch('')
     },[query])
 
     useEffect(() => {
         if(!filteredJobs.length) return
         setLoading(false)
         if(!currentUser) return;
-        axios(`/applicants/users/${currentUser.id}/all_favorites`)
-        .then(({ data: { userFavorites } }) => {
-            const favoritesIds = userFavorites.map(({ job_id }) =>  job_id )
-            filteredJobs.forEach( ({ properties: { id }}) => {
-                if (favoritesIds.includes(id)) {
-                    document.getElementsByName(id)[0].id = 'fav'
-                }
-            })
-        })
-        .catch(err => console.log(err))
     },[filteredJobs])
-
 
     useEffect(() => {
         mapboxgl.accessToken = API_KEY;
@@ -90,7 +81,6 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
 
     function createMap(mapOptions) {
         mapRef.current = new mapboxgl.Map(mapOptions)
-        // mapRef.current = map
         const filteredPoints = geoJsonMarkers(jobs.job_data[0]).features   
         setLoading(true)
         setFilteredJobs(filteredPoints)
@@ -130,6 +120,7 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
         const filteredPoints = (apiJobs.job_data ? 
             geoJsonMarkers(apiJobs.job_data[0]).features :
             geoJsonMarkers(jobs.job_data[0]).features) 
+            
         const currentVisibleJobs = filteredPoints.filter( 
             ({ properties: { skills } }) => ( skills.some( ({ name }) => (
                 newVisibleSkills.includes(name)))))
@@ -166,7 +157,8 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
             alignItems:'center',marginBottom:'1rem',left:'0'}}  onSubmit={e => { e.preventDefault()
                                                                         setQuery(search)  }}>
                 <div>                                                                            
-                    <input id="map-search-input" className="form-control mr-sm-2" type="text" name={query} onChange={e => setSearch(e.target.value)}/>
+                    <input id="map-search-input" className="form-control mr-sm-2" type="text" value={search} onChange={e => setSearch(e.target.value)}/>
+
                     <input className='banner_input-button' type="submit"/>
                 </div>
                 <div>
@@ -192,7 +184,7 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
             <div id='map-and-listings'>
                 
                 <div id="listings-and-page-numbers">
-                    <Jobs currentUser={currentUser} jobs={currentJobs} loading={loading} />
+                    <Jobs currentUser={currentUser} jobs={currentJobs} loading={loading} activeFavorites={activeFavorites} setActiveFavorites={setActiveFavorites} />
                 </div>
                 <div id='map' style={style}></div>
             </div>

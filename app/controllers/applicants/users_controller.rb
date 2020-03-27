@@ -8,7 +8,6 @@ class Applicants::UsersController < Applicants::UserBaseController
   end
 
   def create
-
     if(!%i[jobId user_id].all? { |s| params.has_key? s })
       return
     end
