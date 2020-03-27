@@ -32,6 +32,15 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
     const [jobsPerPage] = useState(5)
     const mapRef = useRef()
 
+
+
+
+
+    const [activeFavorites, setActiveFavorites] = useState([])
+
+
+
+
     // get current jobs 
     const indexOfLastJob = currentPage * jobsPerPage
     const indexOfFirstJob = indexOfLastJob - jobsPerPage
@@ -48,16 +57,23 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
         if(!filteredJobs.length) return
         setLoading(false)
         if(!currentUser) return;
-        axios(`/applicants/users/${currentUser.id}/all_favorites`)
-        .then(({ data: { userFavorites } }) => {
-            const favoritesIds = userFavorites.map(({ job_id }) =>  job_id )
-            filteredJobs.forEach( ({ properties: { id }}) => {
-                if (favoritesIds.includes(id)) {
-                    document.getElementsByName(id)[0].id = 'fav'
-                }
-            })
-        })
-        .catch(err => console.log(err))
+
+
+        // axios(`/applicants/users/${currentUser.id}/all_favorites`)
+        // .then(({ data: { userFavorites } }) => {
+        //     const favoritesIds = userFavorites.map(({ job_id }) =>  job_id )
+        //     console.log(filteredJobs)
+        //     filteredJobs.forEach( ({ properties: { id }}) => {
+        //         console.log(id)
+        //         if (favoritesIds.includes(id)) {
+        //             document.getElementsByName(id)[0].id = 'fav'
+        //         }
+        //     })
+        // })
+        // .catch(err => console.log(err))
+
+
+
     },[filteredJobs])
 
 
@@ -192,7 +208,7 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
             <div id='map-and-listings'>
                 
                 <div id="listings-and-page-numbers">
-                    <Jobs currentUser={currentUser} jobs={currentJobs} loading={loading} />
+                    <Jobs currentUser={currentUser} jobs={currentJobs} loading={loading} activeFavorites={activeFavorites} setActiveFavorites={setActiveFavorites} />
                 </div>
                 <div id='map' style={style}></div>
             </div>
