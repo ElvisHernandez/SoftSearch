@@ -8,8 +8,6 @@ const HomePageForm = ({ skills }) => {
     function handleClick(e) {
         const currentSkill = e.target.value
 
-        console.log(currentSkill)
-
         if (e.target.id === "") {
             setActiveSkills([...activeSkills, currentSkill])
         } else {
@@ -17,11 +15,7 @@ const HomePageForm = ({ skills }) => {
             setActiveSkills(newActiveSkills)
         }
     }
-
-    useEffect(() => {
-        console.log(activeSkills)
-    },[activeSkills])
-
+    
     return(
         <>
             <form action="/search"  method="post">
@@ -33,7 +27,7 @@ const HomePageForm = ({ skills }) => {
 
             <div className="search-item">
                 {skills.map(({ name }, index) => <button key={index} id={activeSkills.includes(name) ? "active":""} className="btn btn-md u-btn-outline-primary g-mr-10 g-mb-15"
-                 onClick={handleClick} value={name}>{name}</button>)}
+                 onClick={handleClick} value={name}>{activeSkills.includes(name) ? '- ':"+ "}{name}</button>)}
             </div> 
         </>
     )

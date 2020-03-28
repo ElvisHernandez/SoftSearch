@@ -8,20 +8,6 @@
 <header class="top-banner-homepage background-banner">
 <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
     <h1 class="title-homepage">Get Hired. Start Coding</h1>
-    <div class="search-bar">
-        <%= form_with(url: "/search", method: "post") do %>
-        <%= label_tag(:q, "") %>
-        <%= text_field_tag(:q, "", class: "form_input", placeholder: "Set a Location") %>
-        <%= submit_tag("SEARCH JOBS", {:class => 'banner_input-button'}) %>
-        <% end %>
-
-    </div>     
-    <div class="search-item">
-        <% @skills.each do |skill|%> 
-          <a href="#" class="btn btn-md u-btn-outline-primary g-mr-10 g-mb-15">+ <%= skill["name"]%></a>
-        <% end %>
-    </div>
-
     <%= react_component('HomePageForm', { skills: @skills }) %>
 </header>
 

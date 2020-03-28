@@ -104,40 +104,20 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser, activeSkills }) => {
             }})
             mapRef.current.addLayer(SEARCH_LAYER)
 
-
-
-            //////////////////////////////////////////////////////////////////////////////  EXPERIMENTAL
-
             if (activeSkills.length) {
-                // activeSkills.forEach( skill => setTimeout(() => skillFilter({ target: { name: skill } }),1000) )
-
                 showNoSkills()
-
                 setVisibleSkills(activeSkills)
-                console.log("active skills, ",activeSkills)
 
                 activeSkills.forEach( skill => {
                     console.log("current skill: ",skill)
                     mapRef.current.setLayoutProperty(skill, 'visibility', 'visible')
                 })
 
-                    
                 const currentVisibleJobs = filteredPoints.filter( 
                     ({ properties: { skills } }) => ( skills.some( ({ name }) => (
                         activeSkills.includes(name)))))
                 setFilteredJobs(currentVisibleJobs)
-
             }
-
-
-
- 
-
-            /////////////////////////////////////////////////////////////////////////////// EXPERIMENTAL
-
-
-
-
         })
         mapRef.current.addControl(new mapboxgl.GeolocateControl(geoLocationOptions))
         mapRef.current.addControl(new MapboxDirections({accessToken: API_KEY}),'top-left')
@@ -145,11 +125,6 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser, activeSkills }) => {
     }
 
     function skillFilter({ target }) {
-
-
-        console.log("this is in skillFilter(): ", target)
-
-
         const [ newVisibility, newVisibleSkills ] = visibleSkills.includes(target.name) ?
         ['none', visibleSkills.filter( skill => skill !== target.name)] :
         ['visible', [...visibleSkills, target.name]]
