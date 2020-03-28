@@ -8,6 +8,7 @@
         API_KEY: ENV['MAPBOX_KEY'],
         jobs: @jobs,
         all_skills: Skill.all,
+        activeSkills: @active_skills,
         currentUser: current_user ? 
         current_user : nil
 

@@ -9,10 +9,6 @@ class Employers::JobsController < Employers::AdminBaseController
     @jobs = Job.where(user_id: @user_id)
   end
 
-  def show
-    @job = Job.find(params[:id])
-  end
-
   def new
     @user_id = params['admin_id']
     @job = Job.new
@@ -20,7 +16,6 @@ class Employers::JobsController < Employers::AdminBaseController
   end
 
   def create
-
     if(!%i[company_name position description address admin_id skills].all? { |s| job_params.has_key? s })
       return
     end

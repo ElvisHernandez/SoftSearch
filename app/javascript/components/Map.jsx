@@ -20,7 +20,7 @@ const style = {
     borderRadius: '10px'
 }
 
-const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
+const Map = ({ API_KEY, jobs, all_skills, currentUser, activeSkills }) => {
     const [filteredJobs, setFilteredJobs] = useState([])
     const [apiJobs, setApiJobs] = useState([])
     const [visibleSkills, setVisibleSkills] = useState(Object.keys(jobs.job_data[1]))

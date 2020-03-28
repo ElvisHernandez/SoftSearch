@@ -13,9 +13,11 @@ class PagesController < ApplicationController
     end
 
     def search
-        puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////#{params}"
+        skills = params['skills'].split(',')
         query = params['q']            
-        redirect_to controller: :maps, action: :show, location: query, :format => 'html'
+
+
+        redirect_to controller: :maps, action: :show, location: query, skills: skills , :format => 'html'
     end
 
 end
