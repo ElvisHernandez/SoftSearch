@@ -109,7 +109,7 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser, activeSkills }) => {
                 setVisibleSkills(activeSkills)
 
                 activeSkills.forEach( skill => {
-                    console.log("current skill: ",skill)
+                    if (!currentSkills.includes(skill)) return;
                     mapRef.current.setLayoutProperty(skill, 'visibility', 'visible')
                 })
 
