@@ -9,6 +9,7 @@ const Jobs = ({ jobs, loading, currentUser, activeFavorites, setActiveFavorites 
 
     useEffect(() => {
         if(!currentUser) return;
+        if(currentUser.employer) return;
         axios(`/applicants/users/${currentUser.id}/all_favorites`)
         .then(({ data: { userFavorites } }) => {
             const favoritesIds = userFavorites.map(({ job_id }) =>  job_id )

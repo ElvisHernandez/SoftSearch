@@ -20,7 +20,7 @@ const style = {
     borderRadius: '10px'
 }
 
-const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
+const Map = ({ API_KEY, jobs, all_skills, currentUser, activeSkills }) => {
     const [filteredJobs, setFilteredJobs] = useState([])
     const [apiJobs, setApiJobs] = useState([])
     const [visibleSkills, setVisibleSkills] = useState(Object.keys(jobs.job_data[1]))
@@ -103,7 +103,21 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser }) => {
                 properties: {foo: 'bar'}
             }})
             mapRef.current.addLayer(SEARCH_LAYER)
-    
+
+            if (activeSkills.length) {
+                showNoSkills()
+                setVisibleSkills(activeSkills)
+
+                activeSkills.forEach( skill => {
+                    console.log("current skill: ",skill)
+                    mapRef.current.setLayoutProperty(skill, 'visibility', 'visible')
+                })
+
+                const currentVisibleJobs = filteredPoints.filter( 
+                    ({ properties: { skills } }) => ( skills.some( ({ name }) => (
+                        activeSkills.includes(name)))))
+                setFilteredJobs(currentVisibleJobs)
+            }
         })
         mapRef.current.addControl(new mapboxgl.GeolocateControl(geoLocationOptions))
         mapRef.current.addControl(new MapboxDirections({accessToken: API_KEY}),'top-left')

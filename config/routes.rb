@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'jobs/index'
-  get 'home/index'
   devise_for :users
   root 'pages#home'
-  get "/pages/:page" => "pages#show"
 
   resource :map, only: [:show]
   
@@ -37,7 +34,4 @@ Rails.application.routes.draw do
       root to: 'admins#index'
     end
   end
-
-  get '/signin/path' => 'pages#trigger_signin', as: 'signin'
-  get '/signup/path' => 'pages#trigger_signup', as: 'signup'
 end

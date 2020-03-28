@@ -19,7 +19,6 @@ const JobForm = ({ userId, allSkills }) => {
     function handleClick(e) {
         const formattedSearch = search.charAt(0).toUpperCase() + search.slice(1)
         setQuery(formattedSearch)
-        console.log(formattedSearch)
     }
 
     return(
