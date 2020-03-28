@@ -2,21 +2,20 @@
 <div class='top-section'>
     <%= react_component "NavigationHome", { isSignedIn: current_user } %>
 
-<header class="top-banner-homepage background-banner map-banner">
-<%= react_component('Map', 
-{
-    API_KEY: ENV['MAPBOX_KEY'],
-    jobs: @jobs,
-    all_skills: Skill.all,
-    currentUser: current_user ? 
-    current_user : nil
+    <header class="top-banner-homepage background-banner map-banner">
+    <%= react_component('Map', 
+    {
+        API_KEY: ENV['MAPBOX_KEY'],
+        jobs: @jobs,
+        all_skills: Skill.all,
+        currentUser: current_user ? 
+        current_user : nil
 
-}) %>
-    </div>  
+    }) %>
+        </div>  
 
 
-</header>
-</div>
+    </header>
 
 
 
