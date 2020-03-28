@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
     #before_action :authenticate_user!
     #before_action :ensure_applicant_user!
+    skip_before_action :verify_authenticity_token
+
 
     def home 
         @skills = Skill.all
@@ -11,20 +13,9 @@ class PagesController < ApplicationController
     end
 
     def search
+        puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////#{params}"
         query = params['q']            
-        redirect_to controller: :maps, action: :show, location: query
+        redirect_to controller: :maps, action: :show, location: query, :format => 'html'
     end
 
-    def trigger_signin
-    end
-
-    def trigger_signup
-    end
-
-    
-    def ensure_applicant_user!
-        unless current_user and current_user.employer == false
-            redirect_to root_path
-        end
-    end
 end

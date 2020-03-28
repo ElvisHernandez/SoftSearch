@@ -24,15 +24,17 @@ const HomePageForm = ({ skills }) => {
 
     return(
         <>
-            <form action="/search" method="post" >
-                <input className="form_input" type="text" value={search} placeholder="Set a Location" onChange={e => {setSearch(e.target.value)}}/>
+            <form action="/search"  method="post">
+                <input className="form_input" type="text" name="q" value={search} placeholder="Set a Location" onChange={e => {setSearch(e.target.value)}}/>
+                <input type="hidden" name="skills" value={activeSkills} />
                 <input className='banner_input-button' type="submit" value="SEARCH JOBS" />
+                
             </form>
 
             <div className="search-item">
-                {skills.map(({ name }) => <button id={activeSkills.includes(name) ? "active":""} className="btn btn-md u-btn-outline-primary g-mr-10 g-mb-15"
+                {skills.map(({ name }, index) => <button key={index} id={activeSkills.includes(name) ? "active":""} className="btn btn-md u-btn-outline-primary g-mr-10 g-mb-15"
                  onClick={handleClick} value={name}>{name}</button>)}
-            </div>
+            </div> 
         </>
     )
 }
