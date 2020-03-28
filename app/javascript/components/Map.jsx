@@ -89,7 +89,28 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser, activeSkills }) => {
                 if (error) throw error
                 mapRef.current.addImage('JobPic', image)
             })
-            createLayers(mapRef.current,jobs.job_data[1],all_skills)
+            //////////////////////////////////////////////////////////////////////////////  EXPERIMENTAL
+            if (activeSkills.length) {
+
+                const activeSkillsObj = {}
+                
+                activeSkills.forEach( skill => {
+                    if (jobs.job_data[1][`${skill}`]) {
+                        activeSkillsObj[`${skill}`] = jobs.job_data[1][`${skill}`]
+                    }
+                })
+
+                console.log("this is our active skill object, ",activeSkillsObj)
+
+                createLayers(mapRef.current,activeSkillsObj,all_skills)
+
+
+            } else {
+                createLayers(mapRef.current,jobs.job_data[1],all_skills)
+            }
+
+            /////////////////////////////////////////////////////////////////////////////// EXPERIMENTAL
+            // createLayers(mapRef.current,jobs.job_data[1],all_skills)
             mapRef.current.loadImage(SearchPin, (error, image) => {
                 if (error) throw error
                 mapRef.current.addImage('SearchPin', image)

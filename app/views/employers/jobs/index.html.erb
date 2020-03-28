@@ -36,7 +36,6 @@
                 <td class="p-3"><%= job.skill_names %></td>
                 <td class="p-3"><%= job.user.email %></td>
                 <td>
-                    <%= link_to "View", "jobs/#{job.id}", class: "btn btn-link no-underline" %>
                     <%= link_to "Delete", "/employers/admins/#{@user_id}/jobs/#{job['id']}",
                     class: "btn btn-link no-underline", method: :delete, data: { confirm: "Are you sure?" } %>
                 </td>
