@@ -41,7 +41,6 @@ const MapSearch = ({ search, setSearch, setQuery, currentSkills, mapRef,
     }
     return(
         <>
-
             <form id="map-search-bar" className="form-inline mr-auto" style={{display:'flex',justifyContent:'space-around',
             alignItems:'center',marginBottom:'1rem',left:'0'}}  onSubmit={e => { e.preventDefault()
                                                                         setQuery(search)  }}>
