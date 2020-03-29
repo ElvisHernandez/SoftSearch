@@ -8,8 +8,8 @@ const Pagination = ({ jobsPerPage, totalJobs, paginate }) => {
     }
 
     return(
-        <nav>
-            <ul className='pagination'>
+        <nav aria-label="job-listing-pages">
+            <ul className='pagination flex-wrap'>
                 {pageNumbers.map(number => (
                     <li key={number} className='page-item'>
                         <button onClick={() => paginate(number)} className='page-link'>

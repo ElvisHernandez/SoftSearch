@@ -43,9 +43,9 @@ const Jobs = ({ jobs, loading, currentUser, activeFavorites, setActiveFavorites 
                 <div key={index} className="card m-0 h-auto w-100">
                     <div className="card-body py-auto">
                         <h6 className="card-title">{properties.position}</h6>
-                        <h6>{properties.company_name}</h6>
+                        <h6 className="card-text">{properties.company_name}</h6>
                         <p className="card-text">{properties.description}</p>
-                        <p>Skills required: {properties.skills.map( ({ name }) => name).join(', ')} | Posted on: {properties.created_at.split("T")[0]}</p>
+                        <p className="card-text">Skills required: {properties.skills.map( ({ name }) => name).join(', ')} | Posted on: {properties.created_at.split("T")[0]}</p>
                         {currentUser && !currentUser.employer &&
                             <>
                                 <a style={{backgroundColor:'rgb(47, 120, 243)'}} href={`/applicants/users/${currentUser.id}/${properties.id}/job_applications/new`} 

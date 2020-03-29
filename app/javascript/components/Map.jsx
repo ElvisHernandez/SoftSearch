@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import Jobs from './Jobs'
 import Pagination from './Pagination'
-
+import MapSearch from './MapSearch'
 import JobPic from '../../assets/images/job.png'
 import SearchPin from '../../assets/images/search.png'
 import { 
@@ -15,8 +15,9 @@ import {
 } from './mapFunctions'
 
 const style = {
-    width: "60vw",
-    height: "1090px",
+    width: "100%",
+    minHeight: "100vh",
+    height: '100%',
     borderRadius: '10px'
 }
 
@@ -105,7 +106,9 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser, activeSkills }) => {
             mapRef.current.addLayer(SEARCH_LAYER)
 
             if (activeSkills.length) {
-                showNoSkills()
+                visibleSkills.forEach( skill => {
+                    mapRef.current.setLayoutProperty(skill, 'visibility', 'none')
+                })
                 setVisibleSkills(activeSkills)
 
                 activeSkills.forEach( skill => {
@@ -124,86 +127,32 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser, activeSkills }) => {
         // map.on('click','markers', e => console.log(e.features[0].properties))
     }
 
-    function skillFilter({ target }) {
-        const [ newVisibility, newVisibleSkills ] = visibleSkills.includes(target.name) ?
-        ['none', visibleSkills.filter( skill => skill !== target.name)] :
-        ['visible', [...visibleSkills, target.name]]
-        mapRef.current.setLayoutProperty(target.name, 'visibility', newVisibility)
-        setVisibleSkills(newVisibleSkills)
-        
-        const filteredPoints = (apiJobs.job_data ? 
-            geoJsonMarkers(apiJobs.job_data[0]).features :
-            geoJsonMarkers(jobs.job_data[0]).features) 
-            
-        const currentVisibleJobs = filteredPoints.filter( 
-            ({ properties: { skills } }) => ( skills.some( ({ name }) => (
-                newVisibleSkills.includes(name)))))
-        setFilteredJobs(currentVisibleJobs)
-    }
-
-    function showNoSkills() {
-        visibleSkills.forEach( skill => {
-            mapRef.current.setLayoutProperty(skill, 'visibility', 'none')
-        })
-        setVisibleSkills([])
-        setFilteredJobs([])
-    }  
-
-    function showAllSkills() {
-        currentSkills.forEach( skill => {
-            mapRef.current.setLayoutProperty(skill, 'visibility', 'visible')
-        })
-        setVisibleSkills(currentSkills)
-        const filteredPoints = (apiJobs.job_data ? 
-        geoJsonMarkers(apiJobs.job_data[0]).features :
-        geoJsonMarkers(jobs.job_data[0]).features) 
-        setFilteredJobs(filteredPoints)
-    }
-
     const fetchJobData = async () => {
         const response = await axios.get(`/map/jobs.json?location=${query}`)
         setApiJobs(response.data)
     } 
 
     return(
-        <>                        
-            <form id="map-search-bar" className="form-inline mr-auto" style={{display:'flex',justifyContent:'space-around',
-            alignItems:'center',marginBottom:'1rem',left:'0'}}  onSubmit={e => { e.preventDefault()
-                                                                        setQuery(search)  }}>
-                <div>                                                                            
-                    <input id="map-search-input" className="form-control mr-sm-2" type="text" value={search} onChange={e => setSearch(e.target.value)}/>
+        <>      
+            <MapSearch search={search} setSearch={setSearch} setQuery={setQuery} currentSkills={currentSkills}
+            mapRef={mapRef} visibleSkills={visibleSkills} setVisibleSkills={setVisibleSkills} apiJobs={apiJobs}
+            jobs={jobs} setFilteredJobs={setFilteredJobs} />
 
-                    <input className='banner_input-button' type="submit"/>
-                </div>
-                <div>
-                    <button className='banner_input-button'  onClick={() => setQuery('GET_ALL')}>SEE ALL JOBS</button>
-                    {currentSkills.length ? (
-                        <>
-                            <button className='banner_input-button' onClick={showAllSkills}>Show all skills</button>
-                            <button className='banner_input-button' onClick={showNoSkills}>Show no skills</button>
-                        </>  ) : null
-                    }
-                </div>
-            </form>
-            <div id="skills" style={{position:'sticky',top:'0', zIndex:'1'}}>
-                <div>
-                    {currentSkills.map( (name,index) => (
-                        <button id="skill-button" className={`btn btn-md u-btn-outline-primary g-mr-10 g-mb-15 
-                        ${visibleSkills.includes(name) ? 'active':"inactive"}`} 
-                        name={name} key={index} onClick={skillFilter}>{visibleSkills.includes(name) ? '- ':"+ "}{name}</button>))
-                    }
-                </div>
-            </div>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-5 px-0">
+                        <Jobs currentUser={currentUser} jobs={currentJobs} loading={loading} 
+                        activeFavorites={activeFavorites} setActiveFavorites={setActiveFavorites} />
+                    </div>
 
-            <div id='map-and-listings'>
-                
-                <div id="listings-and-page-numbers">
-                    <Jobs currentUser={currentUser} jobs={currentJobs} loading={loading} activeFavorites={activeFavorites} setActiveFavorites={setActiveFavorites} />
+                    <div className="col-7 px-0">
+                        <div id='map' style={style}></div>
+                    </div>
                 </div>
-                <div id='map' style={style}></div>
-            </div>
-            <div style={{  }}>
-                <Pagination jobsPerPage={jobsPerPage} totalJobs={filteredJobs.length} paginate={paginate} />
+
+                <div className="row">
+                    <Pagination jobsPerPage={jobsPerPage} totalJobs={filteredJobs.length} paginate={paginate} />
+                </div>
             </div>
         </>
     )
