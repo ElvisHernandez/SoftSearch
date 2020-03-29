@@ -16,7 +16,8 @@ import {
 
 const style = {
     width: "100%",
-    height: "1090px",
+    minHeight: "100vh",
+    height: '100%',
     borderRadius: '10px'
 }
 
@@ -137,19 +138,11 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser, activeSkills }) => {
             mapRef={mapRef} visibleSkills={visibleSkills} setVisibleSkills={setVisibleSkills} apiJobs={apiJobs}
             jobs={jobs} setFilteredJobs={setFilteredJobs} />
 
-            {/* <div id='map-and-listings'>
-                <div id="listings-and-page-numbers">
-                    <Jobs currentUser={currentUser} jobs={currentJobs} loading={loading} activeFavorites={activeFavorites} setActiveFavorites={setActiveFavorites} />
-                </div>
-                <div id='map' style={style}></div>
-            </div> */}
-
-
             <div className="container-fluid">
-
                 <div className="row">
-                    <div className="col-5">
-                        <Jobs currentUser={currentUser} jobs={currentJobs} loading={loading} activeFavorites={activeFavorites} setActiveFavorites={setActiveFavorites} />
+                    <div className="col-5 px-0">
+                        <Jobs currentUser={currentUser} jobs={currentJobs} loading={loading} 
+                        activeFavorites={activeFavorites} setActiveFavorites={setActiveFavorites} />
                     </div>
 
                     <div className="col-7 px-0">
@@ -158,12 +151,8 @@ const Map = ({ API_KEY, jobs, all_skills, currentUser, activeSkills }) => {
                 </div>
 
                 <div className="row">
-                    <div className="col-12">
-                        <Pagination jobsPerPage={jobsPerPage} totalJobs={filteredJobs.length} paginate={paginate} />
-
-                    </div>
+                    <Pagination jobsPerPage={jobsPerPage} totalJobs={filteredJobs.length} paginate={paginate} />
                 </div>
-    
             </div>
         </>
     )
