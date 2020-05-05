@@ -16,7 +16,6 @@ class PagesController < ApplicationController
         skills = params['skills'].split(',')
         query = params['q']            
 
-
         redirect_to controller: :maps, action: :show, location: query, skills: skills , :format => 'html'
     end
 
